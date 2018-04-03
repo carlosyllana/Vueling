@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -11,42 +12,46 @@ using static Vueling.Common.Logic.Enums;
 
 namespace Vueling.Business.Logic
 {
-    public class AlumnoBl : IAlumnoBL
+    public class AlumnoBl : IAlumnoBL 
     {
 
-        private  IAlumnoDAO _alumnoDao;
-      
+        private readonly IAlumnoDao _alumnoDao;
 
-  
+
+
 
         public Alumno Add(Alumno alumno)
         {
-            DateTime hoy = DateTime.Today;
-            alumno.Edad = hoy.AddTicks(-alumno.FechaNacimiento.Ticks).Year - 1;
-            alumno.FechaRegistro = hoy;
-
-            ConfigurationManager.RefreshSection("appSettings");
-            int tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
-
-    
-            switch ((TipoFichero)tipo)
+            try
             {
-                case TipoFichero.TXT:
-                    _alumnoDao = new AlumnoDAOTxt();
-                    _alumnoDao.Add(alumno);
-                    break;
-                case TipoFichero.JSON:
-                    _alumnoDao = new AlumnoDAOJson();
-                    _alumnoDao.Add(alumno);
-                    break;
-                case TipoFichero.XML:
-                    _alumnoDao = new AlumnoDAOXml();
-                    _alumnoDao.Add(alumno);
-                    break;
+
+                Log.Information("Starting web host ");
+
+                alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
+                alumno.FechaRegistro = CalcularFechaRegistro();
+
+                ConfigurationManager.RefreshSection("appSettings");
+                int tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
+
+                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat((Enums.TipoFichero)tipo);
+
+                return doc.Add(alumno);
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+                return null;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+             
             }
 
-       
-            return alumno;
+
+        
         }
 
         public void Formater(Enums.TipoFichero tipo)
@@ -55,6 +60,22 @@ namespace Vueling.Business.Logic
             var value = (int)tipo;
             config.AppSettings.Settings["tipoFichero"].Value = value.ToString();
             config.Save(ConfigurationSaveMode.Modified);
+        }
+
+        public DateTime CalcularFechaRegistro()
+        {
+            return DateTime.Now;
+        }
+
+        public int CalcularEdad(DateTime fechaNacimiento)
+        {
+            DateTime now = DateTime.Today;
+            int age = now.Year - fechaNacimiento.Year;
+            if (now < fechaNacimiento.AddYears(age))
+            {
+                --age;
+            }
+            return age;
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Serilog;
+using Serilog.Events;
 
 namespace Vueling.Presentation.WinSite
 {
@@ -16,6 +18,13 @@ namespace Vueling.Presentation.WinSite
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Log.Logger = new LoggerConfiguration()
+             .MinimumLevel.Debug()
+             .WriteTo.File("log.txt")
+             .WriteTo.Console()
+             //.WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
+             .CreateLogger();
             Application.Run(new AlumnoForm());
 
         }

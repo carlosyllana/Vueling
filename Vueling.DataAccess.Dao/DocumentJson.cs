@@ -10,12 +10,12 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao
 {
-    public class AlumnoDAOJson : IAlumnoDAO
+    public class DocumentJson<T> : IDocument<T> where T: VuelingObject
     {
 
         private String PATH;
 
-        public AlumnoDAOJson()
+        public DocumentJson()
         {
             DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.JSON);
             docManager.LoadDocument();
@@ -23,12 +23,12 @@ namespace Vueling.DataAccess.Dao
         }
 
 
-        public Alumno Add(Alumno alumno)
+        public T Add(T entity)
         {
-            List<Alumno> alumnosList = GetList();
-            if (alumnosList == null)
+            List<T> entityList = GetList();
+            if (entityList == null)
             {
-                alumnosList = new List<Alumno>();
+                entityList = new List<T>();
             }
 
             using (StreamWriter file = new StreamWriter(@PATH))
@@ -38,49 +38,45 @@ namespace Vueling.DataAccess.Dao
                 {
                     Formatting = Formatting.Indented
                 };
-                alumnosList.Add(alumno);
-                serializer.Serialize(file, alumnosList);
+                entityList.Add(entity);
+                serializer.Serialize(file, entityList);
             }
 
-            return Select(alumno.Guid);
+            return Select(entity.Guid);
         }
 
-        public List<Alumno> GetList()
+        public List<T> GetList()
         {
-            List<Alumno> alumnosList = new List<Alumno>();
+            List<T> entityList;
             string json = File.ReadAllText(@PATH);
-            if (json.Equals(String.Empty))
+            if (String.IsNullOrEmpty(json))
             {
-                alumnosList = new List<Alumno>();
+                entityList = new List<T>();
             }
             else
             {
-                alumnosList = JsonConvert.DeserializeObject<List<Alumno>>(json);
+                entityList = JsonConvert.DeserializeObject<List<T>>(json);
 
             }
 
-            return alumnosList;
+            return entityList;
         }
 
-        public Alumno Select(Guid guid)
+        public T Select(Guid guid)
         {
-            List<Alumno> alumnosList = null;
+            List<T> entityList = null;
             string json = File.ReadAllText(@PATH);
-            Alumno alumnoEncontrado = null;
-            alumnosList = JsonConvert.DeserializeObject<List<Alumno>>(json);
-            foreach( var item in alumnosList)
+            T entityFound = null;
+            entityList = JsonConvert.DeserializeObject<List<T>>(json);
+            foreach( var item in entityList)
             {
-
-                if (item.Guid.Equals(guid))
+            if (item.Guid.Equals(guid))
                 {
-                    alumnoEncontrado = item;
+                    entityFound = item;
                     continue;
                 }
             }
-
-
-
-            return alumnoEncontrado;
+            return entityFound;
         }
     }
 }

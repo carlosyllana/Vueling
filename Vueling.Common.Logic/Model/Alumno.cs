@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
-    public class Alumno
+    public class Alumno : VuelingObject
     {
-        public Guid Guid { get; set; }
+
+        public Alumno(string guid, string id, string nombre, string apellidos, string dni, string fechaDeNacimiento, string edad, string fechaDeRegistro)
+        {
+            Guid = Guid.Parse(guid);
+            Id = Convert.ToInt32(id);
+            Nombre = nombre;
+            Apellido = apellidos;
+            Dni = dni;
+            FechaNacimiento = DateTime.Parse(fechaDeNacimiento);
+            FechaRegistro = DateTime.Parse(fechaDeRegistro);
+            Edad = Convert.ToInt32(edad);
+        }
+
+        //public Guid Guid { get; set; }
         public int Id { get; set; }
         public String Nombre { get; set; }
         public String Apellido { get; set; }
@@ -22,12 +35,14 @@ namespace Vueling.Common.Logic.Model
 
         public Alumno()
         {
-            Guid = Guid.NewGuid();
+            this.Guid = Guid.NewGuid();
         }
+
+        
 
         public Alumno(Guid guid, int id, string nombre, string apellido, string dni, DateTime fechaNacimiento)
         {
-            Guid = guid;
+            this.Guid = guid;
             this.Id = id;
             this.Nombre = nombre;
             this.Apellido = apellido;
@@ -39,7 +54,7 @@ namespace Vueling.Common.Logic.Model
 
         public override string ToString()
         {
-            return Guid.ToString()+ ","+Id.ToString() + "," + Nombre + "," + Apellido + "," + Dni +"," + FechaNacimiento.ToString(); 
+            return Guid.ToString() + "," + Id.ToString() + "," + Nombre + "," + Apellido + "," + Dni + "," + FechaNacimiento.ToString() + "," + Edad.ToString() + "," + FechaNacimiento.ToString(); 
         }
 
         public override bool Equals(object obj)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
-    class VuelingObject
+    public class VuelingObject
     {
         public Guid Guid { get; set; }
     }

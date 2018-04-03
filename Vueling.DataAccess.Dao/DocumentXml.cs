@@ -10,73 +10,75 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao
 {
-    public class AlumnoDAOXml : IAlumnoDAO
+    public class DocumentXml<T> : IDocument<T> where T: VuelingObject
     {
         public String PATH;
-        public AlumnoDAOXml()
+
+        public DocumentXml()
         {
             DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.XML);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
         }
 
-        public Alumno Add(Alumno alumno)
+        public T Add(T entity)
         {
-            List<Alumno> alumnosList = GetList();
+            //XmlDocument
+            List<T> entityList = GetList();
             XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
 
-            if (alumnosList == null)
+            if (entityList == null)
             {
-                alumnosList = new List<Alumno>();
+                entityList = new List<T>();
             }
 
             using (FileStream fs1 = new FileStream(@PATH, FileMode.Create))
             {
-                alumnosList.Add(alumno);
-                xSeriz.Serialize(fs1, alumnosList);
+                entityList.Add(entity);
+                xSeriz.Serialize(fs1, entityList);
             }
 
-            return (Select(alumno.Guid));
+            return (Select(entity.Guid));
         }
 
 
 
-        public List<Alumno> GetList()
+        public List<T> GetList()
         {
-            List<Alumno> alumnosList =null;
-            XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
+            List<T> entityList =null;
+            XmlSerializer xSeriz = new XmlSerializer(typeof(List<T>));
             using (StreamReader r = new StreamReader(@PATH))
             {
                 String xml = r.ReadToEnd();
                 if (xml==String.Empty){
-                    alumnosList = new List<Alumno>();
+                    entityList = new List<T>();
                 }
                 else
                 {
                     StringReader stringReader = new StringReader(xml);
-                    alumnosList = (List<Alumno>)xSeriz.Deserialize(stringReader);
+                    entityList = (List<T>)xSeriz.Deserialize(stringReader);
                 }
                 
             }
-            return alumnosList;
+            return entityList;
         }
 
-        public Alumno Select(Guid guid)
+        public T Select(Guid guid)
         {
-            Alumno alumnoEncontrado = null;
-            List<Alumno> alumnosList = GetList();
-             foreach (var item in alumnosList)
+            T entityFound = null;
+            List<T> entityList = GetList();
+             foreach (var item in entityList)
             {
 
                 if (item.Guid.Equals(guid))
                 {
-                    alumnoEncontrado = item;
+                    entityFound = item;
                     continue;
                 }
             }
 
 
-            return alumnoEncontrado;
+            return entityFound;
         }
     }
 }
