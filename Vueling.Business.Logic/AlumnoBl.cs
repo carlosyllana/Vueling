@@ -21,15 +21,14 @@ namespace Vueling.Business.Logic
             {
 
                 Log.Debug("Inicio AlumnoBl add -> "+ alumno.ToString());
-
+                //Calcular Campos
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
 
-                ConfigurationManager.RefreshSection("appSettings");
-                int tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
 
-                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat((Enums.TipoFichero)tipo);
+                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat(GetActualFormat());
 
+                //Añadir.
                 return doc.Add(alumno);
 
 
@@ -42,34 +41,48 @@ namespace Vueling.Business.Logic
             finally
             {
                 Log.Debug("Fin de Alumno Bl add" );
-             
             }
-
-
-        
         }
 
-        public void Formater(Enums.TipoFichero tipo)
+        public void Formater(Enums.TipoFichero tipoFichero)
         {
             try
             {
 
-                Log.Debug("Inicio AlumnoBl Formatear a ->" + tipo.ToString());
+                Log.Debug("Inicio AlumnoBl Formatear a ->" + tipoFichero.ToString());
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                var value = (int)tipo;
+                var value = (int)tipoFichero;
                 config.AppSettings.Settings["tipoFichero"].Value = value.ToString();
                 config.Save(ConfigurationSaveMode.Modified);
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "AlumnoBl Formatear");
-               
+                Log.Fatal(ex, "AlumnoBl Formatear");               
             }
             finally
             {
-
                 Log.Debug("Fin AlumnoBl Formatear");
+            }
+        }
 
+        public Enums.TipoFichero GetActualFormat()
+        {
+            try
+            {
+                Log.Debug("Inicio AlumnoBl GetActualFormat");
+                //Obtener Formato.
+                ConfigurationManager.RefreshSection("appSettings");
+                var tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
+                return (Enums.TipoFichero)tipo;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "AlumnoBl Formatear");
+                return Enums.TipoFichero.TXT;
+            }
+            finally
+            {
+                Log.Debug("Fin AlumnoBl Formatear");
             }
         }
 
@@ -82,7 +95,6 @@ namespace Vueling.Business.Logic
         {
             try
             {
-
                 Log.Debug("Inicio AlumnoBl Calculad Edad");
                 DateTime now = DateTime.Today;
                 int age = now.Year - fechaNacimiento.Year;
@@ -103,6 +115,35 @@ namespace Vueling.Business.Logic
                 Log.Debug("Fin de AlumnoBl Calculad Edad");
 
             }
+        }
+
+        public List<Alumno> getList()
+        {
+
+            try
+            {
+
+                Log.Debug("Inicio AlumnoBl getList ");
+
+                //Obtener Formato.
+                ConfigurationManager.RefreshSection("appSettings");
+                int tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
+                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat((Enums.TipoFichero)tipo);
+                return doc.GetList();
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Error  AlumnoBl getList");
+                return null;
+            }
+            finally
+            {
+                Log.Debug("Fin de  AlumnoBl getList");
+            }
+
         }
     }
 }

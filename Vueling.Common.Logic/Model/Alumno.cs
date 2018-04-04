@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
-    public class Alumno : VuelingObject
+    public class Alumno : VuelingObject 
     {
 
         public Alumno(string guid, string id, string nombre, string apellidos, string dni, string fechaDeNacimiento, string edad, string fechaDeRegistro)
@@ -88,6 +88,12 @@ namespace Vueling.Common.Logic.Model
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Dni);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Guid.ToString());
             return hashCode;
+        }
+
+        public object this[string propertyName]
+        {
+            get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
+            set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
 
 

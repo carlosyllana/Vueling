@@ -12,6 +12,7 @@ namespace Vueling.Business.Logic
     {
         T Add(T alumno);
         void Formater(Enums.TipoFichero tipoFichero);
-
+        List<T> getList();
+        Enums.TipoFichero GetActualFormat();
     }
 }

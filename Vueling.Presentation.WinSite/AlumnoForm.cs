@@ -92,5 +92,11 @@ namespace Vueling.Presentation.WinSite
         {
             this.Close();
         }
+
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            this.Owner.Show();
+            this.Close();
+        }
     }
 }

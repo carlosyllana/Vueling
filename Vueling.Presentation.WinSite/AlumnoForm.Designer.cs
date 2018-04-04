@@ -44,6 +44,7 @@
             this.lblAñadirFormato = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.btnMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.upId)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,7 +178,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(31, 277);
+            this.btnSalir.Location = new System.Drawing.Point(31, 304);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(207, 23);
             this.btnSalir.TabIndex = 15;
@@ -185,11 +186,22 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // btnMenu
+            // 
+            this.btnMenu.Location = new System.Drawing.Point(31, 275);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(207, 23);
+            this.btnMenu.TabIndex = 16;
+            this.btnMenu.Text = "Volver al Menu";
+            this.btnMenu.UseVisualStyleBackColor = true;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
+            // 
             // AlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(271, 339);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblAñadirFormato);
@@ -232,6 +244,7 @@
         private System.Windows.Forms.Label lblAñadirFormato;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnMenu;
     }
 }
 

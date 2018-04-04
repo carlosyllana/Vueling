@@ -26,7 +26,7 @@ namespace Vueling.Presentation.WinSite
              .WriteTo.Console()
              //.WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
              .CreateLogger();
-            Application.Run(new AlumnoForm());
+            Application.Run(new Menu());
             Log.CloseAndFlush();
 
         }

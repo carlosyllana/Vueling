@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Singletons\ListadoAlumnosXml.cs" />
+    <Compile Include="Singletons\ListadoAlumnosJson.cs" />
+    <Compile Include="Singletons\ListadoAlumnosTxt.cs" />
     <Compile Include="Utils\DocumentsManager.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\Alumno.cs" />

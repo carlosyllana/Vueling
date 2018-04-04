@@ -10,7 +10,7 @@ namespace Vueling.Common.Logic
     {
 
         public enum Opciones { SALIR, CREAR, CONFIGURAR };
-        public enum TipoFichero { TXT = 1, JSON = 2, XML = 3 };
+        public enum TipoFichero { TXT = 0, JSON = 1, XML = 2 };
 
     }
 }

@@ -19,7 +19,7 @@ namespace Vueling.DataAccess.Dao
                 case Enums.TipoFichero.JSON:
                     return new DocumentJson<T>();
                 case Enums.TipoFichero.XML:
-                    return new DocumentJson<T>();
+                    return new DocumentXml<T>();
                 default:
                     return null;
             }
