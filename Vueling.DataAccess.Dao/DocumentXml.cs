@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,62 +24,107 @@ namespace Vueling.DataAccess.Dao
 
         public T Add(T entity)
         {
-            //XmlDocument
-            List<T> entityList = GetList();
-            XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
-
-            if (entityList == null)
+            try
             {
-                entityList = new List<T>();
-            }
 
-            using (FileStream fs1 = new FileStream(@PATH, FileMode.Create))
+                Log.Debug("Inicio XML Add ->" + entity.ToString());
+                List<T> entityList = GetList();
+                XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
+
+                if (entityList == null)
+                {
+                    entityList = new List<T>();
+                }
+
+                using (FileStream fs1 = new FileStream(@PATH, FileMode.Create))
+                {
+                    entityList.Add(entity);
+                    xSeriz.Serialize(fs1, entityList);
+                }
+
+                return (Select(entity.Guid));
+            }
+            catch (Exception ex)
             {
-                entityList.Add(entity);
-                xSeriz.Serialize(fs1, entityList);
+                Log.Fatal(ex, "Error ADD XML");
+                return null;
             }
-
-            return (Select(entity.Guid));
+            finally
+            {
+                Log.Debug("Fin de XML ADD");
+            }
         }
 
 
 
         public List<T> GetList()
         {
-            List<T> entityList =null;
-            XmlSerializer xSeriz = new XmlSerializer(typeof(List<T>));
-            using (StreamReader r = new StreamReader(@PATH))
+            try
             {
-                String xml = r.ReadToEnd();
-                if (xml==String.Empty){
-                    entityList = new List<T>();
-                }
-                else
+
+                Log.Debug("Inicio XML GetList");
+                List<T> entityList =null;
+                XmlSerializer xSeriz = new XmlSerializer(typeof(List<T>));
+                using (StreamReader r = new StreamReader(@PATH))
                 {
-                    StringReader stringReader = new StringReader(xml);
-                    entityList = (List<T>)xSeriz.Deserialize(stringReader);
-                }
+                    String xml = r.ReadToEnd();
+                    if (xml==String.Empty){
+                        entityList = new List<T>();
+                    }
+                    else
+                    {
+                        StringReader stringReader = new StringReader(xml);
+                        entityList = (List<T>)xSeriz.Deserialize(stringReader);
+                    }
                 
+                }
+                return entityList;
+             }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Error GetList XML");
+                return null;
             }
-            return entityList;
+            finally
+            {
+
+                Log.Debug("Fin de XML GetList");
+
+            }
         }
 
         public T Select(Guid guid)
         {
-            T entityFound = null;
-            List<T> entityList = GetList();
-             foreach (var item in entityList)
+            try
             {
 
-                if (item.Guid.Equals(guid))
+                Log.Debug("Inicio XML Select ->"+ guid.ToString());
+                T entityFound = null;
+                List<T> entityList = GetList();
+                 foreach (var item in entityList)
                 {
-                    entityFound = item;
-                    continue;
+
+                    if (item.Guid.Equals(guid))
+                    {
+                        entityFound = item;
+                        continue;
+                    }
                 }
+
+
+                return entityFound;
             }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Error Select XML");
+                return null;
+            }
+            finally
+            {
 
+                Log.Debug("Fin de XML Select");
 
-            return entityFound;
+            }
         }
     }
 }

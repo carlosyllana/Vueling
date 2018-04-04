@@ -21,6 +21,18 @@ namespace Vueling.Common.Logic.Model
             Edad = Convert.ToInt32(edad);
         }
 
+        public Alumno(Guid guid, int id, string nombre, string apellidos, string dni, DateTime fechaDeNacimiento, int edad, DateTime fechaDeRegistro)
+        {
+            Guid = guid;
+            Id = id;
+            Nombre = nombre;
+            Apellido = apellidos;
+            Dni = dni;
+            FechaNacimiento = fechaDeNacimiento;
+            FechaRegistro = fechaDeRegistro;
+            Edad = edad;
+        }
+
         //public Guid Guid { get; set; }
         public int Id { get; set; }
         public String Nombre { get; set; }
