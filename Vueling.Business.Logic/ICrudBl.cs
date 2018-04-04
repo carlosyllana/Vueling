@@ -8,9 +8,9 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.Business.Logic
 {
-    public interface IAlumnoBL
+    public interface ICrudBl<T> where T : VuelingObject
     {
-        Alumno Add(Alumno alumno);
+        T Add(T alumno);
         void Formater(Enums.TipoFichero tipoFichero);
 
     }

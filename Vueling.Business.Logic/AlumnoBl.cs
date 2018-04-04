@@ -12,7 +12,7 @@ using static Vueling.Common.Logic.Enums;
 
 namespace Vueling.Business.Logic
 {
-    public class AlumnoBl : IAlumnoBL 
+    public class AlumnoBl : ICrudBl<Alumno> 
     {
 
         public Alumno Add(Alumno alumno)

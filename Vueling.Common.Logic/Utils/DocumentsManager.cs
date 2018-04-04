@@ -16,7 +16,6 @@ namespace Vueling.Common.Logic
         public DocumentsManager(Enums.TipoFichero tipo)
         {
             this.tipo = tipo;
-
         }
 
         public void LoadDocument()
@@ -62,7 +61,7 @@ namespace Vueling.Common.Logic
 
         public static string GetXmlPath()
         {
-            //txtFile
+            //xmlFile
             string value;
             value = Environment.GetEnvironmentVariable("xmlFile", EnvironmentVariableTarget.User);
             return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + value;

@@ -7,19 +7,19 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao
 {
-    class AlumnoDao : IAlumnoDao
+    public class AlumnoDao : IAlumnoDao
     {
 
-        private IDocument<Alumno> _doc;
+        private IDocument<Alumno> iDoc;
         public AlumnoDao(IDocument<Alumno> doc)
         {
-            _doc = doc;
+            iDoc = doc;
         }
 
         public Alumno Add(Alumno alumno)
         {
-            _doc.Add(alumno);
-            return _doc.Select(alumno.Guid);
+            iDoc.Add(alumno);
+            return iDoc.Select(alumno.Guid);
         }
     }
 }

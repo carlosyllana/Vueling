@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentsManager.cs" />
+    <Compile Include="Utils\DocumentsManager.cs" />
     <Compile Include="Model\Enums.cs" />
     <Compile Include="Model\Alumno.cs" />
     <Compile Include="Model\VuelingObject.cs" />

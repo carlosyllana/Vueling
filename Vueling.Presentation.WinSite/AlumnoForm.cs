@@ -17,7 +17,7 @@ namespace Vueling.Presentation.WinSite
     {
 
         private Alumno alumno;
-        private IAlumnoBL _alumnoBl;
+        private ICrudBl<Alumno> _alumnoBl;
 
         public AlumnoForm()
         {
