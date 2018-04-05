@@ -75,7 +75,6 @@ namespace Vueling.Presentation.WinSite
             alumno.Nombre = txtNombre.Text;
             alumno.Apellido = txtApellido.Text;
             alumno.Dni = txtDni.Text;
-            alumno.Guid = Guid.NewGuid();
             alumno.FechaNacimiento = dpFechaNacimiento.Value;
         }
         private void LimpiarCampos()

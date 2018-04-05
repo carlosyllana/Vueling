@@ -33,7 +33,7 @@ namespace Vueling.DataAccess.Dao
                 {
                     tw.WriteLine(entity.ToString());
                 }
-
+               
                 return Select(entity.Guid);
             }
             catch (Exception ex)

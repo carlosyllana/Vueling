@@ -11,6 +11,11 @@ namespace Vueling.DataAccess.Dao
     {
 
         private IDocument<Alumno> iDoc;
+
+        public AlumnoDao()
+        {
+        }
+
         public AlumnoDao(IDocument<Alumno> doc)
         {
             iDoc = doc;
@@ -18,8 +23,17 @@ namespace Vueling.DataAccess.Dao
 
         public Alumno Add(Alumno alumno)
         {
-            iDoc.Add(alumno);
-            return iDoc.Select(alumno.Guid);
+            return iDoc.Add(alumno); 
+        }
+
+        public List<Alumno> getList()
+        {
+            return iDoc.GetList();
+        }
+
+        public Alumno Select(Guid guid)
+        {
+            return iDoc.Select(guid);
         }
     }
 }

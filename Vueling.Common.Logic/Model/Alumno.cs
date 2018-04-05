@@ -66,7 +66,8 @@ namespace Vueling.Common.Logic.Model
 
         public override string ToString()
         {
-            return Guid.ToString() + "," + Id.ToString() + "," + Nombre + "," + Apellido + "," + Dni + "," + FechaNacimiento.ToString() + "," + Edad.ToString() + "," + FechaNacimiento.ToString(); 
+            
+            return Guid.ToString() + "," + Id.ToString() + "," + Nombre + "," + Apellido + "," + Dni + "," + FechaNacimiento.ToString() + "," + Edad.ToString() + "," + FechaRegistro.ToString(); 
         }
 
         public override bool Equals(object obj)
@@ -95,6 +96,13 @@ namespace Vueling.Common.Logic.Model
             get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
             set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
+
+        public Type GetPropertyTypeByName(string propertyName)
+        {
+            return (Type)(this.GetType().GetProperty(propertyName).PropertyType);
+        }
+
+    
 
 
     }

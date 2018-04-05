@@ -24,12 +24,12 @@ namespace Vueling.Business.Logic
                 //Calcular Campos
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
-
-
                 IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat(GetActualFormat());
 
+                IAlumnoDao iAlumnoDao = new AlumnoDao(doc);
+
                 //Añadir.
-                return doc.Add(alumno);
+                return iAlumnoDao.Add(alumno);
 
 
             }
@@ -49,7 +49,8 @@ namespace Vueling.Business.Logic
             try
             {
 
-                Log.Debug("Inicio AlumnoBl Formatear a ->" + tipoFichero.ToString());
+                //Log.Debug("Inicio AlumnoBl Formatear a ->" + tipoFichero.ToString());
+
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 var value = (int)tipoFichero;
                 config.AppSettings.Settings["tipoFichero"].Value = value.ToString();
@@ -125,11 +126,11 @@ namespace Vueling.Business.Logic
 
                 Log.Debug("Inicio AlumnoBl getList ");
 
-                //Obtener Formato.
-                ConfigurationManager.RefreshSection("appSettings");
-                int tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
-                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat((Enums.TipoFichero)tipo);
-                return doc.GetList();
+                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat(GetActualFormat());
+                IAlumnoDao iAlumnoDao = new AlumnoDao(doc);
+
+                //Añadir.
+                return iAlumnoDao.getList();
 
 
 

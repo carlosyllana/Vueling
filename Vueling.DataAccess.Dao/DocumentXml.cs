@@ -3,16 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao
 {
     public class DocumentXml<T> : IDocument<T> where T: VuelingObject
     {
+
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public String PATH;
 
         public DocumentXml()
@@ -26,7 +30,7 @@ namespace Vueling.DataAccess.Dao
         {
             try
             {
-
+                _log.Debug("Error 4Net");
                 Log.Debug("Inicio XML Add ->" + entity.ToString());
                 List<T> entityList = GetList();
                 XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
@@ -107,7 +111,7 @@ namespace Vueling.DataAccess.Dao
                     if (item.Guid.Equals(guid))
                     {
                         entityFound = item;
-                        continue;
+                        break;
                     }
                 }
 

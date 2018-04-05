@@ -9,6 +9,8 @@ namespace Vueling.DataAccess.Dao
 {
     public interface IAlumnoDao
     { 
-         Alumno Add(Alumno alumno);
+        Alumno Add(Alumno alumno);
+        List<Alumno> getList();
+        Alumno Select(Guid guid);
     }
 }

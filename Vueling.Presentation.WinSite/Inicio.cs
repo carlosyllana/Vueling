@@ -21,8 +21,8 @@ namespace Vueling.Presentation.WinSite
 
             Log.Logger = new LoggerConfiguration()
              .MinimumLevel.Debug()
-             .WriteTo.File("log.txt")
-             .WriteTo.File("debugLog.txt", restrictedToMinimumLevel: LogEventLevel.Debug)
+             .WriteTo.File(@"Logs\serilog.txt")
+             //.WriteTo.File("debugLog.txt", restrictedToMinimumLevel: LogEventLevel.Debug)
              .WriteTo.Console()
              //.WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
              .CreateLogger();

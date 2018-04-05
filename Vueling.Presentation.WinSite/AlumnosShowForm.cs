@@ -110,22 +110,35 @@ namespace Vueling.Presentation.WinSite
         {
             if (!String.IsNullOrEmpty(value)&&!String.IsNullOrEmpty(column))
             {
-                Alumno al = new Alumno(Guid.NewGuid(), 1, "carl", "yllan", "a", DateTime.Now, 24, DateTime.Now);
-                String a =(string)al["Nombre"];
+
                 switch (tipoFichero)
                 {
                     case Enums.TipoFichero.TXT:
                         var queryTxt =
                             from Alumno item in ListadoAlumnosTxt.Instance.GetListValues()
-                            where ((String)item[column]).Equals(value)
+                                //Obtener el tipo que toca
+ //                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
+
+                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                              select item;
                         dataGridAlumnos.DataSource = queryTxt.ToList(); dataGridAlumnos.Update();
                         break;
                     case Enums.TipoFichero.JSON:
                         var queryJson =
                             from Alumno item in ListadoAlumnosJson.Instance.GetListValues()
-                            where (item[column]).Equals(value)
+                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                             select item;
+                        /*Alumno al = queryJson.First<Alumno>();
+                        DateTime dt = al.FechaNacimiento;
+                        foreach (var item in queryJson.ToList())
+                        {
+                            var dt2 = Convert.ChangeType(value, item.GetPropertyTypeByName(column));
+                            if (item.FechaNacimiento.Equals(dt2))
+                            {
+                                bool an= true;
+                            }
+                        }*/
+
                         dataGridAlumnos.DataSource = queryJson.ToList();
                         dataGridAlumnos.Update();
                         break;
@@ -133,7 +146,7 @@ namespace Vueling.Presentation.WinSite
                     case Enums.TipoFichero.XML:
                         var queryXml =
                             from Alumno item in ListadoAlumnosXml.Instance.GetListValues()
-                            where ((String)item[column]).Equals(value)
+                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                             select item;
                         dataGridAlumnos.DataSource = queryXml.ToList();
                         dataGridAlumnos.Update();
