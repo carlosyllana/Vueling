@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic.Model;
+using Serilog;
+using Vueling.Common.Logic.Log;
+using System.Reflection;
 
 namespace Vueling.Common.Logic
 {
@@ -12,7 +15,7 @@ namespace Vueling.Common.Logic
 
         private static ListadoAlumnosXml instance =null;
         private static List<Alumno> alumnoList = new List<Alumno>();
-
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private ListadoAlumnosXml(){}
 
         public static ListadoAlumnosXml Instance{
@@ -34,10 +37,24 @@ namespace Vueling.Common.Logic
         }
         public void AddList(List<Alumno> listAl)
         {
-           foreach (var item in listAl)
+            try
             {
-                alumnoList.Add(item);
+                _log.Debug("Inicio AddList ListadoAlumnosXml");
+                foreach (var item in listAl)
+                {
+                    alumnoList.Add(item);
+                }
             }
+            catch(NullReferenceException e)
+            {
+                _log.Debug("Lista Vacia AddList ERROR:" + e);
+                throw;
+            }
+            finally
+            {
+                _log.Debug("Fin AddList ListadoAlumnosXml");
+            }
+
         }
 
         public bool ContainsAlumno(Alumno alumno)

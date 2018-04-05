@@ -76,6 +76,7 @@ namespace Vueling.Presentation.WinSite
             alumno.Apellido = txtApellido.Text;
             alumno.Dni = txtDni.Text;
             alumno.FechaNacimiento = dpFechaNacimiento.Value;
+            alumno.Guid = Guid.NewGuid();
         }
         private void LimpiarCampos()
         {
@@ -83,7 +84,7 @@ namespace Vueling.Presentation.WinSite
             txtApellido.Text = "";
             txtDni.Text = "";
             upId.Value = 0;
-            dpFechaNacimiento.Value = DateTime.Today;
+            dpFechaNacimiento.Value = DateTime.Today.Date;
 
         }
 
@@ -97,5 +98,7 @@ namespace Vueling.Presentation.WinSite
             this.Owner.Show();
             this.Close();
         }
+
+
     }
 }

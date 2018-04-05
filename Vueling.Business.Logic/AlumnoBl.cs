@@ -89,7 +89,7 @@ namespace Vueling.Business.Logic
 
         public DateTime CalcularFechaRegistro()
         {
-            return DateTime.Now;
+            return DateTime.Now.Date;
         }
 
         public int CalcularEdad(DateTime fechaNacimiento)
@@ -97,7 +97,7 @@ namespace Vueling.Business.Logic
             try
             {
                 Log.Debug("Inicio AlumnoBl Calculad Edad");
-                DateTime now = DateTime.Today;
+                DateTime now = DateTime.Today.Date;
                 int age = now.Year - fechaNacimiento.Year;
                 if (now < fechaNacimiento.AddYears(age))
                 {

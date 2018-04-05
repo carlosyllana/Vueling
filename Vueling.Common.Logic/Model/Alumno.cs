@@ -16,8 +16,8 @@ namespace Vueling.Common.Logic.Model
             Nombre = nombre;
             Apellido = apellidos;
             Dni = dni;
-            FechaNacimiento = DateTime.Parse(fechaDeNacimiento);
-            FechaRegistro = DateTime.Parse(fechaDeRegistro);
+            FechaNacimiento = DateTime.Parse(fechaDeNacimiento).Date;
+            FechaRegistro = DateTime.Parse(fechaDeRegistro).Date;
             Edad = Convert.ToInt32(edad);
         }
 
@@ -28,8 +28,8 @@ namespace Vueling.Common.Logic.Model
             Nombre = nombre;
             Apellido = apellidos;
             Dni = dni;
-            FechaNacimiento = fechaDeNacimiento;
-            FechaRegistro = fechaDeRegistro;
+            FechaNacimiento = fechaDeNacimiento.Date;
+            FechaRegistro = fechaDeRegistro.Date;
             Edad = edad;
         }
 
@@ -59,8 +59,8 @@ namespace Vueling.Common.Logic.Model
             this.Nombre = nombre;
             this.Apellido = apellido;
             this.Dni = dni;
-            this.FechaNacimiento = fechaNacimiento;
-            this.FechaRegistro = new DateTime();
+            this.FechaNacimiento = fechaNacimiento.Date;
+            this.FechaRegistro = new DateTime().Date;
         }
 
 
