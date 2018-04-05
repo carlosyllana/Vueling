@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.Dao
 {
@@ -18,9 +19,12 @@ namespace Vueling.DataAccess.Dao
 
         private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
         public String PATH;
+        private SendMail mailer;
+
 
         public DocumentXml()
         {
+            mailer = new SendMail();
             DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.XML);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
@@ -30,8 +34,8 @@ namespace Vueling.DataAccess.Dao
         {
             try
             {
-                _log.Debug("Error 4Net");
-                Log.Debug("Inicio XML Add ->" + entity.ToString());
+                _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList = GetList();
                 XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
 
@@ -48,14 +52,29 @@ namespace Vueling.DataAccess.Dao
 
                 return (Select(entity.Guid));
             }
+            catch (FileNotFoundException ex)
+            {
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error ADD XML");
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-                Log.Debug("Fin de XML ADD");
+                _log.Info("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             }
         }
 
@@ -66,7 +85,8 @@ namespace Vueling.DataAccess.Dao
             try
             {
 
-                Log.Debug("Inicio XML GetList");
+                _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList =null;
                 XmlSerializer xSeriz = new XmlSerializer(typeof(List<T>));
                 using (StreamReader r = new StreamReader(@PATH))
@@ -83,16 +103,29 @@ namespace Vueling.DataAccess.Dao
                 
                 }
                 return entityList;
-             }
+            }
+            catch (FileNotFoundException ex)
+            {
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error GetList XML");
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-
-                Log.Debug("Fin de XML GetList");
+                _log.Info("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             }
         }
@@ -102,7 +135,8 @@ namespace Vueling.DataAccess.Dao
             try
             {
 
-                Log.Debug("Inicio XML Select ->"+ guid.ToString());
+                _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 T entityFound = null;
                 List<T> entityList = GetList();
                  foreach (var item in entityList)
@@ -118,15 +152,28 @@ namespace Vueling.DataAccess.Dao
 
                 return entityFound;
             }
+            catch (FileNotFoundException ex)
+            {
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error Select XML");
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-
-                Log.Debug("Fin de XML Select");
+                _log.Info("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             }
         }

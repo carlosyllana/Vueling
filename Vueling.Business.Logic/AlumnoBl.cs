@@ -2,10 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.Dao;
 using static Vueling.Common.Logic.Enums;
@@ -14,13 +17,14 @@ namespace Vueling.Business.Logic
 {
     public class AlumnoBl : ICrudBl<Alumno> 
     {
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public Alumno Add(Alumno alumno)
         {
             try
             {
-
-                Log.Debug("Inicio AlumnoBl add -> "+ alumno.ToString());
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name+ " -> " + alumno.ToString());
+                Log.Debug("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name + " -> " + alumno.ToString());
                 //Calcular Campos
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
@@ -33,14 +37,24 @@ namespace Vueling.Business.Logic
 
 
             }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error al añadir Alumno" );
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-                Log.Debug("Fin de Alumno Bl add" );
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             }
         }
 
@@ -48,21 +62,30 @@ namespace Vueling.Business.Logic
         {
             try
             {
-
-                //Log.Debug("Inicio AlumnoBl Formatear a ->" + tipoFichero.ToString());
-
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name );
+                Log.Debug("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 var value = (int)tipoFichero;
                 config.AppSettings.Settings["tipoFichero"].Value = value.ToString();
                 config.Save(ConfigurationSaveMode.Modified);
             }
+            catch(ConfigurationErrorsException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en AppSettings-- > " + ex);
+                throw;
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "AlumnoBl Formatear");               
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
             }
             finally
             {
-                Log.Debug("Fin AlumnoBl Formatear");
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name); 
             }
         }
 
@@ -76,14 +99,23 @@ namespace Vueling.Business.Logic
                 var tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
                 return (Enums.TipoFichero)tipo;
             }
+            catch (ConfigurationErrorsException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en AppSettings-- > " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "AlumnoBl Formatear");
-                return Enums.TipoFichero.TXT;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al leer  en AppSettings--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al leer en AppSettings-- > " + ex);
+                throw;
             }
             finally
             {
-                Log.Debug("Fin AlumnoBl Formatear");
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name); 
             }
         }
 
@@ -96,24 +128,33 @@ namespace Vueling.Business.Logic
         {
             try
             {
-                Log.Debug("Inicio AlumnoBl Calculad Edad");
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Debug("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 DateTime now = DateTime.Today.Date;
                 int age = now.Year - fechaNacimiento.Year;
-                if (now < fechaNacimiento.AddYears(age))
+                if (now <= fechaNacimiento.AddYears(age))
                 {
                     --age;
                 }
                 return age;
             }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "AlumnoBl Calculad Edad");
-                return -1;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-
-                Log.Debug("Fin de AlumnoBl Calculad Edad");
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
             }
         }
@@ -123,8 +164,8 @@ namespace Vueling.Business.Logic
 
             try
             {
-
-                Log.Debug("Inicio AlumnoBl getList ");
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Debug("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat(GetActualFormat());
                 IAlumnoDao iAlumnoDao = new AlumnoDao(doc);
@@ -135,14 +176,24 @@ namespace Vueling.Business.Logic
 
 
             }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error  AlumnoBl getList");
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-                Log.Debug("Fin de  AlumnoBl getList");
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
             }
 
         }

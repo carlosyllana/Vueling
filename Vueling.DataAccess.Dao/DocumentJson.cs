@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
+using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
+using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.Dao
 {
@@ -15,9 +18,12 @@ namespace Vueling.DataAccess.Dao
     {
 
         private String PATH;
+        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private SendMail mailer;
 
         public DocumentJson()
         {
+            mailer = new SendMail();
             DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.JSON);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
@@ -29,7 +35,8 @@ namespace Vueling.DataAccess.Dao
             try
             {
 
-                Log.Debug("Inicio JSON Add ->" +entity.ToString());
+                _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 List<T> entityList = GetList();
                 if (entityList == null)
@@ -50,15 +57,27 @@ namespace Vueling.DataAccess.Dao
 
                 return Select(entity.Guid);
             }
+            catch (FileNotFoundException ex)
+            {
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error ->"+  entity.ToString());
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-           
-                Log.Information("Fin de JSON ADD");            
+                _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
         }
@@ -68,8 +87,8 @@ namespace Vueling.DataAccess.Dao
 
             try
             {
-
-                Log.Information("Inicio JSON GetList");
+                _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Inicio JSON "+ System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList;
                 string json = File.ReadAllText(@PATH);
                 if (String.IsNullOrEmpty(json))
@@ -84,14 +103,28 @@ namespace Vueling.DataAccess.Dao
 
                 return entityList;
             }
+            catch (FileNotFoundException ex)
+            {
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> "+ ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error GetList");
-                return null;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en "+ System.Reflection.MethodBase.GetCurrentMethod().Name+"--> " + ex);
+                throw;
             }
             finally
             {
-                Log.Debug("Fin de JSON GetList");
+                _log.Info("Fin de JSON "+ System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -101,7 +134,8 @@ namespace Vueling.DataAccess.Dao
             try
             {
 
-                Log.Debug("Inicio JSON Select Guid->" +guid.ToString());
+                _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList = null;
                 string json = File.ReadAllText(@PATH);
               
@@ -116,15 +150,27 @@ namespace Vueling.DataAccess.Dao
                 }
                 return entityFound;
             }
+            catch (FileNotFoundException ex)
+            {
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
+            catch (IOException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
+            }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Error GetList");
-                return entityFound;
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                throw;
             }
             finally
             {
-
-                Log.Debug("Fin de JSON GetList");
+                _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                Log.Information("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
     }

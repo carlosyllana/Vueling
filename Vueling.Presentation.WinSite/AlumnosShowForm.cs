@@ -116,9 +116,6 @@ namespace Vueling.Presentation.WinSite
                     case Enums.TipoFichero.TXT:
                         var queryTxt =
                             from Alumno item in ListadoAlumnosTxt.Instance.GetListValues()
-                                //Obtener el tipo que toca
- //                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
-
                             where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                              select item;
                         dataGridAlumnos.DataSource = queryTxt.ToList(); dataGridAlumnos.Update();
@@ -128,16 +125,6 @@ namespace Vueling.Presentation.WinSite
                             from Alumno item in ListadoAlumnosJson.Instance.GetListValues()
                             where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                             select item;
-                        /*Alumno al = queryJson.First<Alumno>();
-                        DateTime dt = al.FechaNacimiento;
-                        foreach (var item in queryJson.ToList())
-                        {
-                            var dt2 = Convert.ChangeType(value, item.GetPropertyTypeByName(column));
-                            if (item.FechaNacimiento.Equals(dt2))
-                            {
-                                bool an= true;
-                            }
-                        }*/
 
                         dataGridAlumnos.DataSource = queryJson.ToList();
                         dataGridAlumnos.Update();
