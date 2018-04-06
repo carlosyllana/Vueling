@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -34,35 +35,33 @@ namespace Vueling.DataAccess.Dao
             {
 
                 _log.Info("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 using (var tw = new StreamWriter(@PATH, true))
                 {
                     tw.WriteLine(entity.ToString());
                 }
+                throw new IOException();
                 return Select(entity.Guid);
             }
             catch (FileNotFoundException ex)
             {     
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex); 
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message); 
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
 
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
             {
                 _log.Info("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 
             }
         }
@@ -73,7 +72,6 @@ namespace Vueling.DataAccess.Dao
             {
 
                 _log.Info("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 string line;
                 List<T> entityList = new List<T>();
                 using (StreamReader file = new StreamReader(@PATH))
@@ -93,25 +91,23 @@ namespace Vueling.DataAccess.Dao
             }
             catch (FileNotFoundException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
             {
                 _log.Info("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
         }
@@ -123,7 +119,6 @@ namespace Vueling.DataAccess.Dao
             {
 
                 _log.Info("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 var line = String.Empty;
                 Guid actualGuid;
                 var entityString = new String[] { };
@@ -135,7 +130,6 @@ namespace Vueling.DataAccess.Dao
                     {
                         entityString = line.Split(',');
                         actualGuid = new Guid(entityString[0]);
-                        Log.Debug("Guid While Item->" + actualGuid.ToString());
                         if (actualGuid.Equals(guid))
                         { 
                             entityFound = line;
@@ -153,26 +147,23 @@ namespace Vueling.DataAccess.Dao
             }
             catch (FileNotFoundException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-
+                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
             {
                 _log.Info("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
         }

@@ -40,18 +40,18 @@ namespace Vueling.Common.Logic
             }
             catch (FileNotFoundException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
 
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
@@ -88,18 +88,18 @@ namespace Vueling.Common.Logic
             }
             catch (ArgumentNullException ex)
             {
-                _log.Fatal("Error en " +MethodBase.GetCurrentMethod().Name + " El valor de variable es null.--> " + ex);
+                _log.Fatal("Error en " +MethodBase.GetCurrentMethod().Name + " El valor de variable es null.--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
 
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally

@@ -36,7 +36,6 @@ namespace Vueling.DataAccess.Dao
             {
 
                 _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
                 List<T> entityList = GetList();
                 if (entityList == null)
@@ -59,25 +58,23 @@ namespace Vueling.DataAccess.Dao
             }
             catch (FileNotFoundException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
             {
                 _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
         }
@@ -88,7 +85,6 @@ namespace Vueling.DataAccess.Dao
             try
             {
                 _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Inicio JSON "+ System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList;
                 string json = File.ReadAllText(@PATH);
                 if (String.IsNullOrEmpty(json))
@@ -105,26 +101,24 @@ namespace Vueling.DataAccess.Dao
             }
             catch (FileNotFoundException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
 
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> "+ ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> "+ ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en "+ System.Reflection.MethodBase.GetCurrentMethod().Name+"--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
             {
                 _log.Info("Fin de JSON "+ System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -135,7 +129,6 @@ namespace Vueling.DataAccess.Dao
             {
 
                 _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList = null;
                 string json = File.ReadAllText(@PATH);
               
@@ -152,25 +145,23 @@ namespace Vueling.DataAccess.Dao
             }
             catch (FileNotFoundException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
-                Log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             finally
             {
                 _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                Log.Information("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
     }

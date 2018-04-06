@@ -53,11 +53,11 @@ namespace Vueling.Common.Logic.Utils
             }
             catch (SmtpFailedRecipientsException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
             }
             catch (Exception ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
             }
             finally
             {
