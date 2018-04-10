@@ -17,7 +17,7 @@ namespace Vueling.DataAcces.Dao.Test
         public void TestInit()
         {
             DocumentsManager docMan = new DocumentsManager(Enums.TipoFichero.JSON);
-            String filename = docMan.GetPath(); if (File.Exists(filename)) File.Delete(filename);
+            String filename = docMan.GetPath(); if (File.ex.Messageists(filename)) File.Delete(filename);
             iAlumnoDao = new AlumnoDao(DocumentFactory<Alumno>.getFormat((Enums.TipoFichero.XML)));
         }
 

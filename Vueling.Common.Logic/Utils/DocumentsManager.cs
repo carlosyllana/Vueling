@@ -17,7 +17,7 @@ namespace Vueling.Common.Logic
     {
         public static String PATH;
         private Enums.TipoFichero tipo;
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
         private SendMail mailer;
 
         public DocumentsManager(Enums.TipoFichero tipo)
@@ -38,16 +38,40 @@ namespace Vueling.Common.Logic
                     File.CreateText(PATH);
                 }
             }
-            catch (FileNotFoundException ex)
+            catch (ArgumentNullException ex)
             {
-                mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
                 _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
-
             }
             catch (Exception ex)
             {
@@ -57,9 +81,8 @@ namespace Vueling.Common.Logic
             finally
             {
                 _log.Info("Fin de DocumentManager " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
             }
-            
+
         }
 
         public String GetPath()
@@ -81,21 +104,40 @@ namespace Vueling.Common.Logic
                 }
                 return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + " \\" + fileName;
             }
-            catch (SecurityException ex)
-            {
-                _log.Fatal("Error en " + MethodBase.GetCurrentMethod().Name + "--> El autor de la llamada no tiene el permiso requerido para llevar a cabo esta operación.");
-                throw;
-            }
             catch (ArgumentNullException ex)
             {
-                _log.Fatal("Error en " +MethodBase.GetCurrentMethod().Name + " El valor de variable es null.--> " + ex.Message);
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
                 _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
-
             }
             catch (Exception ex)
             {
@@ -105,9 +147,8 @@ namespace Vueling.Common.Logic
             finally
             {
                 _log.Info("Fin de DocumentManager " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
             }
-            
+
         }
 
     }

@@ -13,7 +13,7 @@ namespace Vueling.Common.Logic.Utils
 {
     public class SendMail
     {
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static readonly string smtp = "smtp.gmail.com";
         private static readonly string myMail = "cygmindundi@gmail.com";

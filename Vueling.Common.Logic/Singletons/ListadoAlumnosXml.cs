@@ -15,7 +15,7 @@ namespace Vueling.Common.Logic
 
         private static ListadoAlumnosXml instance =null;
         private static List<Alumno> alumnoList = new List<Alumno>();
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
         private ListadoAlumnosXml(){}
 
         public static ListadoAlumnosXml Instance{

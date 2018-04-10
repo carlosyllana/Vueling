@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
@@ -18,7 +19,7 @@ namespace Vueling.DataAccess.Dao
     {
 
         private String PATH;
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = null;
         private SendMail mailer;
 
         public DocumentJson()
@@ -27,6 +28,7 @@ namespace Vueling.DataAccess.Dao
             DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.JSON);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
+            _log = new AdpSerilog();
         }
 
 
@@ -56,10 +58,34 @@ namespace Vueling.DataAccess.Dao
 
                 return Select(entity.Guid);
             }
-            catch (FileNotFoundException ex)
+            catch (ArgumentNullException ex)
             {
-                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
@@ -99,16 +125,39 @@ namespace Vueling.DataAccess.Dao
 
                 return entityList;
             }
-            catch (FileNotFoundException ex)
+            catch (ArgumentNullException ex)
             {
-                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
-
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)
             {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> "+ ex.Message);
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (Exception ex)
@@ -118,7 +167,7 @@ namespace Vueling.DataAccess.Dao
             }
             finally
             {
-                _log.Info("Fin de JSON "+ System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
 
@@ -143,10 +192,34 @@ namespace Vueling.DataAccess.Dao
                 }
                 return entityFound;
             }
-            catch (FileNotFoundException ex)
+            catch (ArgumentNullException ex)
             {
-                //mailer.email_send("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
             }
             catch (IOException ex)

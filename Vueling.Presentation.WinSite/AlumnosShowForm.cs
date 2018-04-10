@@ -28,9 +28,9 @@ namespace Vueling.Presentation.WinSite
             ViewData(tipoFichero);
             LoadCbCampo();
 
-            
 
-           
+
+
 
 
 
@@ -99,7 +99,7 @@ namespace Vueling.Presentation.WinSite
 
         private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             String column = cbCampo.Text;
             String value = txtBuscar.Text;
             GetLinqData(column, value);
@@ -108,7 +108,7 @@ namespace Vueling.Presentation.WinSite
 
         private void GetLinqData(String column, String value)
         {
-            if (!String.IsNullOrEmpty(value)&&!String.IsNullOrEmpty(column))
+            if (!String.IsNullOrEmpty(value) && !String.IsNullOrEmpty(column))
             {
 
                 switch (tipoFichero)
@@ -117,7 +117,7 @@ namespace Vueling.Presentation.WinSite
                         var queryTxt =
                             from Alumno item in ListadoAlumnosTxt.Instance.GetListValues()
                             where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
-                             select item;
+                            select item;
                         dataGridAlumnos.DataSource = queryTxt.ToList(); dataGridAlumnos.Update();
                         break;
                     case Enums.TipoFichero.JSON:
@@ -145,7 +145,7 @@ namespace Vueling.Presentation.WinSite
             {
                 ViewData(tipoFichero);
             }
-            
+
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)

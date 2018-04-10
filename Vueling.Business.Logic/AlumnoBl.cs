@@ -5,6 +5,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Vueling.Common.Logic;
@@ -17,7 +18,7 @@ namespace Vueling.Business.Logic
 {
     public class AlumnoBl : ICrudBl<Alumno> 
     {
-        private readonly IVuelingLogger _log = new VuelingLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
 
         public Alumno Add(Alumno alumno)
         {
@@ -36,11 +37,40 @@ namespace Vueling.Business.Logic
 
 
             }
+            catch (ArgumentNullException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
             catch (IOException ex)
             {
                 _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
-
             }
             catch (Exception ex)
             {
@@ -157,12 +187,41 @@ namespace Vueling.Business.Logic
 
 
 
+            }                     
+            catch (ArgumentNullException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (PathTooLongException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+            }
+            catch (SecurityException ex)
+            {
+                _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
             }
             catch (IOException ex)
             {
                 _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
                 throw;
-
             }
             catch (Exception ex)
             {
@@ -171,7 +230,7 @@ namespace Vueling.Business.Logic
             }
             finally
             {
-                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _log.Info("Fin de TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
 
         }
