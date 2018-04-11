@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Common.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
 
@@ -184,6 +185,14 @@ namespace Vueling.DataAccess.Dao
             {
                 _log.Info("Fin de AlumnoDao " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
+        }
+
+
+        public void LoadList()
+        {
+            ListadoAlumnosXml listXml = ListadoAlumnosXml.Instance;
+            ListadoAlumnosTxt listTxt = ListadoAlumnosTxt.Instance;
+            ListadoAlumnosJson listJson = ListadoAlumnosJson.Instance;
         }
     }
 }

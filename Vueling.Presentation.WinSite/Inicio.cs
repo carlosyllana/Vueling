@@ -20,16 +20,7 @@ namespace Vueling.Presentation.WinSite
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            //log4net.Config.XmlConfigurator.Configure();
-            Log.Logger = new LoggerConfiguration()
-              .WriteTo.File(@"Logs\serilog.txt")
-              .WriteTo.Console()
-              //.WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Information)
-              .CreateLogger();
-
             Application.Run(new Menu());
-            Log.CloseAndFlush();
 
         }
 

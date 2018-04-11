@@ -15,8 +15,11 @@ namespace Vueling.Presentation.WinSite
 {
     public partial class Menu : Form
     {
+        private ICrudBl<Alumno> _alumnoBl;
+
         public Menu()
         {
+            _alumnoBl = new AlumnoBl();
             InitializeComponent();
             LoadList();
 
@@ -59,6 +62,47 @@ namespace Vueling.Presentation.WinSite
             lBussines.Formater(Enums.TipoFichero.JSON);
             listJson.AddList(lBussines.getList());
 
+        }
+
+        private void iDiomaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.eSToolStripMenuItem.Checked = true;
+            this.cATToolStripMenuItem.Checked = false;
+
+        }
+
+        private void cATToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.eSToolStripMenuItem.Checked = false ;
+            this.cATToolStripMenuItem.Checked = true;
+        }
+
+        private void tXTToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.tXTToolStripMenuItem1.Checked = true;
+            this.jSONToolStripMenuItem1.Checked = false;
+            this.xMLToolStripMenuItem1.Checked = false;
+            _alumnoBl.Formater(Enums.TipoFichero.TXT);
+        }
+
+        private void jSONToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.tXTToolStripMenuItem1.Checked = false;
+            this.jSONToolStripMenuItem1.Checked = true;
+            this.xMLToolStripMenuItem1.Checked = false;
+            _alumnoBl.Formater(Enums.TipoFichero.JSON);
+        }
+        private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.tXTToolStripMenuItem1.Checked = false;
+            this.jSONToolStripMenuItem1.Checked = false;
+            this.xMLToolStripMenuItem1.Checked = true;
+            _alumnoBl.Formater(Enums.TipoFichero.XML);
         }
     }
 }

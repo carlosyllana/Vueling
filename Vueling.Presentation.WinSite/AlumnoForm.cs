@@ -24,48 +24,19 @@ namespace Vueling.Presentation.WinSite
             InitializeComponent();
             alumno = new Alumno();
             _alumnoBl = new AlumnoBl();
-        }
-
-
-
-        private void btnJson_Click(object sender, EventArgs e)
-        {
-            GenerarAlumno();
-            _alumnoBl.Formater(Enums.TipoFichero.JSON);
-            Alumno al =_alumnoBl.Add(alumno);
-            if (al != null)
-            {
-                MessageBox.Show("Usuario Añadido");
-                LimpiarCampos();
-            }
 
         }
 
         private void btnTxt_Click(object sender, EventArgs e)
         {
             GenerarAlumno();
-            _alumnoBl.Formater(Enums.TipoFichero.TXT);
-            Alumno al =_alumnoBl.Add(alumno);
+            Alumno al = _alumnoBl.Add(alumno);
             if (al != null)
             {
                 MessageBox.Show("Usuario Añadido");
                 LimpiarCampos();
             }
 
-
-        }
-
-        private void btnXml_Click(object sender, EventArgs e)
-        {
-            GenerarAlumno();
-            _alumnoBl.Formater(Enums.TipoFichero.XML);
-            Alumno al =_alumnoBl.Add(alumno);
-
-            if (al != null)
-            {
-                MessageBox.Show("Usuario Añadido");
-                LimpiarCampos();
-            }
 
         }
 
@@ -99,6 +70,40 @@ namespace Vueling.Presentation.WinSite
             this.Close();
         }
 
+        private void cATToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.eSToolStripMenuItem.Checked = false;
+            this.cATToolStripMenuItem.Checked = true;
+        }
 
+        private void eSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.eSToolStripMenuItem.Checked = true;
+            this.cATToolStripMenuItem.Checked = false;
+
+        }
+
+        private void tXTToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.tXTToolStripMenuItem1.Checked = true;
+            this.jSONToolStripMenuItem1.Checked = false;
+            this.xMLToolStripMenuItem1.Checked = false;
+            _alumnoBl.Formater(Enums.TipoFichero.TXT);
+        }
+
+        private void jSONToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.tXTToolStripMenuItem1.Checked = false;
+            this.jSONToolStripMenuItem1.Checked = true;
+            this.xMLToolStripMenuItem1.Checked = false;
+            _alumnoBl.Formater(Enums.TipoFichero.JSON);
+        }
+        private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.tXTToolStripMenuItem1.Checked = false;
+            this.jSONToolStripMenuItem1.Checked = false;
+            this.xMLToolStripMenuItem1.Checked = true;
+            _alumnoBl.Formater(Enums.TipoFichero.XML);
+        }
     }
 }

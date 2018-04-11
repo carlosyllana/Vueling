@@ -59,13 +59,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlumnoDao.cs" />
-    <Compile Include="DAOJson.cs" />
-    <Compile Include="DAOTxt.cs" />
-    <Compile Include="DAOXml.cs" />
-    <Compile Include="DAOFactory.cs" />
-    <Compile Include="IDAO.cs" />
+    <Compile Include="DAO\AlumnoDao.cs" />
+    <Compile Include="DAO\DAOJson.cs" />
+    <Compile Include="DAO\DAOTxt.cs" />
+    <Compile Include="DAO\DAOXml.cs" />
+    <Compile Include="DAO\DAOFactory.cs" />
+    <Compile Include="DAO\IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Singletons\ListadoAlumnosJson.cs" />
+    <Compile Include="Singletons\ListadoAlumnosTxt.cs" />
+    <Compile Include="Singletons\ListadoAlumnosXml.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vueling.Common.Logic\Vueling.Common.Logic.csproj">
