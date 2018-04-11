@@ -8,18 +8,18 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao
 {
-    public static class DocumentFactory<T> where T : VuelingObject
+    public static class DAOFactory<T> where T : VuelingObject
     {
-        public static IDocument<T> getFormat(Enums.TipoFichero dataType)
+        public static IDAO<T> getFormat(Enums.TipoFichero dataType)
         {
             switch (dataType)
             {
                 case Enums.TipoFichero.TXT:
-                    return new DocumentTxt<T>();
+                    return new DAOTxt<T>();
                 case Enums.TipoFichero.JSON:
-                    return new DocumentJson<T>();
+                    return new DAOJson<T>();
                 case Enums.TipoFichero.XML:
-                    return new DocumentXml<T>();
+                    return new DAOXml<T>();
                 default:
                     return null;
             }

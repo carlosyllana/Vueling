@@ -17,14 +17,13 @@ using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.Dao
 {
-    public class DocumentTxt<T> : IDocument<T> where T: VuelingObject
+    public class DAOTxt<T> : IDAO<T> where T: VuelingObject
     {
         private readonly IVuelingLogger _log= null;
-        private SendMail mailer;
         private String PATH;
-        public DocumentTxt()
+        public DAOTxt()
         {
-            mailer = new SendMail();
+           
             DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.TXT);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;

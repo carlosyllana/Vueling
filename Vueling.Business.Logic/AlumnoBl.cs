@@ -28,12 +28,8 @@ namespace Vueling.Business.Logic
                 //Calcular Campos
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
-                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat(GetActualFormat());
-
-                IAlumnoDao iAlumnoDao = new AlumnoDao(doc);
-
-                //Añadir.
-                return iAlumnoDao.Add(alumno);
+                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat(GetActualFormat());
+                return doc.Add(alumno);
 
 
             }
@@ -179,11 +175,9 @@ namespace Vueling.Business.Logic
             {
                 _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-                IDocument<Alumno> doc = DocumentFactory<Alumno>.getFormat(GetActualFormat());
-                IAlumnoDao iAlumnoDao = new AlumnoDao(doc);
-
+                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat(GetActualFormat());
                 //Añadir.
-                return iAlumnoDao.getList();
+                return doc.GetList();
 
 
 

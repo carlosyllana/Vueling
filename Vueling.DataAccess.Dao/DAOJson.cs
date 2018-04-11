@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,6 @@ using System.Reflection;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
@@ -15,44 +15,48 @@ using Vueling.Common.Logic.Utils;
 
 namespace Vueling.DataAccess.Dao
 {
-    public class DocumentXml<T> : IDocument<T> where T: VuelingObject
+    public class DAOJson<T> : IDAO<T> where T: VuelingObject
     {
 
-        private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
-        public String PATH;
+        private String PATH;
+        private readonly IVuelingLogger _log = null;
         private SendMail mailer;
 
-
-        public DocumentXml()
+        public DAOJson()
         {
             mailer = new SendMail();
-            DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.XML);
+            DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.JSON);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
+            _log = new AdpSerilog();
         }
 
-        public IVuelingLogger Log => _log;
 
         public T Add(T entity)
         {
             try
             {
-                _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                List<T> entityList = GetList();
-                XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
 
+                _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+                List<T> entityList = GetList();
                 if (entityList == null)
                 {
                     entityList = new List<T>();
                 }
 
-                using (FileStream fs1 = new FileStream(@PATH, FileMode.Create))
+                using (StreamWriter file = new StreamWriter(@PATH))
                 {
+
+                    JsonSerializer serializer = new JsonSerializer
+                    {
+                        Formatting = Formatting.Indented
+                    };
                     entityList.Add(entity);
-                    xSeriz.Serialize(fs1, entityList);
+                    serializer.Serialize(file, entityList);
                 }
 
-                return (Select(entity.Guid));
+                return Select(entity.Guid);
             }
             catch (ArgumentNullException ex)
             {
@@ -96,33 +100,29 @@ namespace Vueling.DataAccess.Dao
             }
             finally
             {
-                _log.Info("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
+
         }
-
-
 
         public List<T> GetList()
         {
+
             try
             {
-
-                _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                List<T> entityList =null;
-                XmlSerializer xSeriz = new XmlSerializer(typeof(List<T>));
-                using (StreamReader r = new StreamReader(@PATH))
+                _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                List<T> entityList;
+                string json = File.ReadAllText(@PATH);
+                if (String.IsNullOrEmpty(json))
                 {
-                    String xml = r.ReadToEnd();
-                    if (xml==String.Empty){
-                        entityList = new List<T>();
-                    }
-                    else
-                    {
-                        StringReader stringReader = new StringReader(xml);
-                        entityList = (List<T>)xSeriz.Deserialize(stringReader);
-                    }
-                
+                    entityList = new List<T>();
                 }
+                else
+                {
+                    entityList = JsonConvert.DeserializeObject<List<T>>(json);
+
+                }
+
                 return entityList;
             }
             catch (ArgumentNullException ex)
@@ -167,29 +167,29 @@ namespace Vueling.DataAccess.Dao
             }
             finally
             {
-                _log.Info("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
 
         public T Select(Guid guid)
         {
+            T entityFound = null;
             try
             {
 
-                _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                T entityFound = null;
-                List<T> entityList = GetList();
-                 foreach (var item in entityList)
+                _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                List<T> entityList = null;
+                string json = File.ReadAllText(@PATH);
+              
+                entityList = JsonConvert.DeserializeObject<List<T>>(json);
+                foreach( var item in entityList)
                 {
-
-                    if (item.Guid.Equals(guid))
+                if (item.Guid.Equals(guid))
                     {
                         entityFound = item;
-                        break;
+                        continue;
                     }
                 }
-
-
                 return entityFound;
             }
             catch (ArgumentNullException ex)
@@ -234,8 +234,9 @@ namespace Vueling.DataAccess.Dao
             }
             finally
             {
-                _log.Info("Fin de XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                _log.Info("Fin de JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
     }
+    
 }

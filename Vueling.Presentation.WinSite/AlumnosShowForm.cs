@@ -27,13 +27,6 @@ namespace Vueling.Presentation.WinSite
             this.dataGridAlumnos.ReadOnly = true;
             ViewData(tipoFichero);
             LoadCbCampo();
-
-
-
-
-
-
-
         }
 
         private void LoadCbCampo()
@@ -67,7 +60,6 @@ namespace Vueling.Presentation.WinSite
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
-            Menu menu = new Menu();
             this.Owner.Show();
             this.Close();
         }

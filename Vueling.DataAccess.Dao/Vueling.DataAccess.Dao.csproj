@@ -60,12 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlumnoDao.cs" />
-    <Compile Include="DocumentJson.cs" />
-    <Compile Include="DocumentTxt.cs" />
-    <Compile Include="DocumentXml.cs" />
-    <Compile Include="DocumentFactory.cs" />
-    <Compile Include="IDocument.cs" />
-    <Compile Include="IAlumnoDao.cs" />
+    <Compile Include="DAOJson.cs" />
+    <Compile Include="DAOTxt.cs" />
+    <Compile Include="DAOXml.cs" />
+    <Compile Include="DAOFactory.cs" />
+    <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

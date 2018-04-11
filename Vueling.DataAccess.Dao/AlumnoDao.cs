@@ -10,24 +10,25 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao
 {
-    public class AlumnoDao : IAlumnoDao
-    {
-        private readonly IVuelingLogger _log = null;
-        private IDocument<Alumno> iDoc;
+    public class AlumnoDao<T> : IDAO<T> where T : VuelingObject { 
 
-        public AlumnoDao(IDocument<Alumno> doc)
+
+        private readonly IVuelingLogger _log = null;
+        private IDAO<T> iDoc;
+
+        public AlumnoDao(IDAO<T> doc)
         {
             iDoc = doc;
             _log =  new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
 
         }
 
-        public Alumno Add(Alumno alumno)
+        public T Add(T entity)
         {
             try
             {
-                _log.Info("Inicio AlumnoDao  " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Alumno ->"+ alumno.ToString());
-                return iDoc.Add(alumno);
+                _log.Info("Inicio AlumnoDao  " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Alumno ->"+ entity.ToString());
+                return iDoc.Add(entity);
             }
             catch (ArgumentNullException ex)
             {
@@ -76,7 +77,7 @@ namespace Vueling.DataAccess.Dao
            
         }
 
-        public List<Alumno> getList()
+        public List<T> GetList()
         {
             try
             {
@@ -130,7 +131,8 @@ namespace Vueling.DataAccess.Dao
             }
         }
 
-        public Alumno Select(Guid guid)
+
+        public T Select(Guid guid)
         {
             try
             {

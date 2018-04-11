@@ -5,7 +5,7 @@ using Vueling.Common.Logic.Model;
 namespace Vueling.DataAccess.Dao
 
 {
-    public interface IDocument<T> where T : VuelingObject
+    public interface IDAO<T> where T : VuelingObject
     {
         T Add(T entity);
         T Select(Guid guid);
