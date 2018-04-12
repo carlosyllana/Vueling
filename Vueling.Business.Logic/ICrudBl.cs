@@ -11,10 +11,10 @@ namespace Vueling.Business.Logic
     public interface ICrudBl<T> where T : VuelingObject
     {
         T Add(T alumno);
-        void Formater(Enums.TipoFichero tipoFichero);
         List<T> getList();
-        Enums.TipoFichero GetActualFormat();
-        void GrabarIdioma(Idioma idioma);
-        Idioma GetActualLanguage();
+        //void Formater(TipoFichero tipoFichero);
+        //TipoFichero GetActualFormat();
+        //void GrabarIdioma(Idioma idioma);
+        //Idioma GetActualLanguage();
     }
 }

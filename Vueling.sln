@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Common.Logic", "Vue
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vueling.DataAcces.Dao.Test", "Vueling.DataAcces.Dao.Test\Vueling.DataAcces.Dao.Test.csproj", "{A7CBE72E-9211-4F06-8961-689AD9866EE8}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vueling.Data.SQLScripts", "Vueling.Data.SQLScripts\Vueling.Data.SQLScripts.sqlproj", "{BF1ECA71-BD3A-4542-AD2E-589910FF9195}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,12 @@ Global
 		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

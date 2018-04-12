@@ -55,11 +55,11 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.esAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
             this.catAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.eNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.txtAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
             this.jsonAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
             this.xmlAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
-            this.eNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.upId)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -271,16 +271,23 @@
             // esAlumnoForm
             // 
             this.esAlumnoForm.Name = "esAlumnoForm";
-            this.esAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.esAlumnoForm.Size = new System.Drawing.Size(96, 22);
             this.esAlumnoForm.Text = "ES";
             this.esAlumnoForm.Click += new System.EventHandler(this.esAlumnoForm_Click);
             // 
             // catAlumnoForm
             // 
             this.catAlumnoForm.Name = "catAlumnoForm";
-            this.catAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.catAlumnoForm.Size = new System.Drawing.Size(96, 22);
             this.catAlumnoForm.Text = "CAT";
             this.catAlumnoForm.Click += new System.EventHandler(this.catAlumnoForm_Click);
+            // 
+            // eNToolStripMenuItem
+            // 
+            this.eNToolStripMenuItem.Name = "eNToolStripMenuItem";
+            this.eNToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.eNToolStripMenuItem.Text = "EN";
+            this.eNToolStripMenuItem.Click += new System.EventHandler(this.eNToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -289,8 +296,8 @@
             this.jsonAlumnoForm,
             this.xmlAlumnoForm});
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(62, 20);
-            this.toolStripMenuItem4.Text = "formato";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(64, 20);
+            this.toolStripMenuItem4.Text = "Formato";
             // 
             // txtAlumnoForm
             // 
@@ -312,13 +319,6 @@
             this.xmlAlumnoForm.Size = new System.Drawing.Size(180, 22);
             this.xmlAlumnoForm.Text = "XML";
             this.xmlAlumnoForm.Click += new System.EventHandler(this.xmlAlumnoForm_Click);
-            // 
-            // eNToolStripMenuItem
-            // 
-            this.eNToolStripMenuItem.Name = "eNToolStripMenuItem";
-            this.eNToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.eNToolStripMenuItem.Text = "EN";
-            this.eNToolStripMenuItem.Click += new System.EventHandler(this.eNToolStripMenuItem_Click);
             // 
             // AlumnoForm
             // 

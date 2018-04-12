@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic
 {
-    public static class Enums
+    public enum TipoFichero
     {
-
-        public enum TipoFichero {
-            TXT = 0, JSON = 1, XML = 2
-
-        };
+            TXT = 0,
+            JSON = 1,
+            XML = 2
 
     }
 }

@@ -20,11 +20,11 @@ namespace Vueling.DataAcces.Dao.Test
         {
             _log.Info("Inicialiazamos Tests");
             _log.Debug("Limpiamos de ficheros existentes");
-            DocumentsManager docMan = new DocumentsManager(Enums.TipoFichero.JSON);
+            DocumentsManager docMan = new DocumentsManager(TipoFichero.JSON);
             String filename = docMan.GetPath();
             if (File.Exists(filename)) File.Delete(filename);
             _log.Debug("Obtenemos el alumno DAO con el formato actual.");
-            iAlumnoDao = new AlumnoDao<Alumno>(DAOFactory<Alumno>.getFormat((Enums.TipoFichero.JSON)));
+            iAlumnoDao = new AlumnoDao<Alumno>(DAOFactory<Alumno>.getFormat());
         }
 
 

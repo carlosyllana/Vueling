@@ -25,7 +25,7 @@ namespace Vueling.DataAccess.Dao
         public DAOJson()
         {
             mailer = new SendMail();
-            DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.JSON);
+            DocumentsManager docManager = new DocumentsManager(TipoFichero.JSON);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
             _log = new AdpSerilog();

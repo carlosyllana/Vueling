@@ -24,17 +24,19 @@ namespace Vueling.Presentation.WinSite
         private ICrudBl<Alumno> _alumnoBl;
         ResourceManager res_man;
         CultureInfo cul;
-
+        ConfigManager confManager = null;
 
         public Menu()
         {
             _alumnoBl = new AlumnoBl();
+            confManager = new ConfigManager();
             InitializeComponent();
             LoadList();
             cul = CultureInfo.CreateSpecificCulture("ca");
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
             CheckFormatMenu();
             LoadLenguageItem();
+            UpdateLanguage();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,11 +68,11 @@ namespace Vueling.Presentation.WinSite
             ListadoAlumnosTxt listTxt = ListadoAlumnosTxt.Instance;
             ListadoAlumnosJson listJson = ListadoAlumnosJson.Instance;
             ICrudBl<Alumno> lBussines = new AlumnoBl();
-            lBussines.Formater(Enums.TipoFichero.TXT);
+            confManager.Formater(TipoFichero.TXT);
             listTxt.AddList(lBussines.getList());
-            lBussines.Formater(Enums.TipoFichero.XML);
+            confManager.Formater(TipoFichero.XML);
             listXml.AddList(lBussines.getList());
-            lBussines.Formater(Enums.TipoFichero.JSON);
+            confManager.Formater(TipoFichero.JSON);
             listJson.AddList(lBussines.getList());
 
         }
@@ -81,7 +83,7 @@ namespace Vueling.Presentation.WinSite
             this.cATToolStripMenuItem.Checked = false;
             this.eNToolStripMenuItem.Checked = false;
            cul = CultureInfo.CreateSpecificCulture("es");
-            _alumnoBl.GrabarIdioma(Idioma.ES);
+            confManager.GrabarIdioma(Idioma.ES);
             UpdateLanguage();
         }
 
@@ -91,7 +93,7 @@ namespace Vueling.Presentation.WinSite
            this.eSToolStripMenuItem.Checked = false;
             this.cATToolStripMenuItem.Checked = true;
             cul = CultureInfo.CreateSpecificCulture("ca");
-            _alumnoBl.GrabarIdioma(Idioma.CAT);
+            confManager.GrabarIdioma(Idioma.CAT);
             UpdateLanguage();
         }
 
@@ -100,7 +102,7 @@ namespace Vueling.Presentation.WinSite
             this.tXTToolStripMenuItem1.Checked = true;
             this.jSONToolStripMenuItem1.Checked = false;
             this.xMLToolStripMenuItem1.Checked = false;
-            _alumnoBl.Formater(Enums.TipoFichero.TXT);
+            confManager.Formater(TipoFichero.TXT);
 
         }
 
@@ -109,14 +111,14 @@ namespace Vueling.Presentation.WinSite
             this.tXTToolStripMenuItem1.Checked = false;
             this.jSONToolStripMenuItem1.Checked = true;
             this.xMLToolStripMenuItem1.Checked = false;
-            _alumnoBl.Formater(Enums.TipoFichero.JSON);
+            confManager.Formater(TipoFichero.JSON);
         }
         private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.tXTToolStripMenuItem1.Checked = false;
             this.jSONToolStripMenuItem1.Checked = false;
             this.xMLToolStripMenuItem1.Checked = true;
-            _alumnoBl.Formater(Enums.TipoFichero.XML);
+            confManager.Formater(TipoFichero.XML);
         }
 
         private void UpdateLanguage()
@@ -131,7 +133,7 @@ namespace Vueling.Presentation.WinSite
 
         private void LoadLenguageItem()
         {
-            switch (_alumnoBl.GetActualLanguage())
+            switch (confManager.GetActualLanguage())
             {
                 case Idioma.CAT:
                     this.cATToolStripMenuItem.Checked = true;
@@ -151,16 +153,16 @@ namespace Vueling.Presentation.WinSite
         {
 
 
-            switch (_alumnoBl.GetActualFormat())
+            switch (confManager.GetActualFormat())
             {
-                case Enums.TipoFichero.TXT:
+                case TipoFichero.TXT:
                     this.tXTToolStripMenuItem1.Checked = true;
                     break;
-                case Enums.TipoFichero.JSON:
+                case TipoFichero.JSON:
                     this.jSONToolStripMenuItem1.Checked = true;
                     break;
 
-                case Enums.TipoFichero.XML:
+                case TipoFichero.XML:
                     this.xMLToolStripMenuItem1.Checked = true;
                     break;
 
@@ -174,7 +176,7 @@ namespace Vueling.Presentation.WinSite
             this.cATToolStripMenuItem.Checked = false;
             this.eNToolStripMenuItem.Checked = true;
             cul = CultureInfo.CreateSpecificCulture("en");
-            _alumnoBl.GrabarIdioma(Idioma.EN);
+            confManager.GrabarIdioma(Idioma.EN);
 
             UpdateLanguage();
         }

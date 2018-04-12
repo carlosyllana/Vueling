@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="DAO\AlumnoDao.cs" />
     <Compile Include="DAO\DAOJson.cs" />
+    <Compile Include="DAO\DAOSql.cs" />
     <Compile Include="DAO\DAOTxt.cs" />
     <Compile Include="DAO\DAOXml.cs" />
     <Compile Include="DAO\DAOFactory.cs" />

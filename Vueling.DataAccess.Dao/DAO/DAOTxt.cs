@@ -24,7 +24,7 @@ namespace Vueling.DataAccess.Dao
         public DAOTxt()
         {
            
-            DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.TXT);
+            DocumentsManager docManager = new DocumentsManager(TipoFichero.TXT);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
             _log = new AdpSerilog();

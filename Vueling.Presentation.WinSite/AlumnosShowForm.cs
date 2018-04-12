@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
@@ -20,19 +21,19 @@ namespace Vueling.Presentation.WinSite
     {
 
         private ICrudBl<Alumno> _alumnoBl;
-        Enums.TipoFichero tipoFichero;
+        TipoFichero tipoFichero;
         ResourceManager res_man;
         CultureInfo cul;
-
+        ConfigManager confManager = null;
         public AlumnosShowForm()
         {
             InitializeComponent();
-            cul = CultureInfo.CreateSpecificCulture("ca");
+            cul = Thread.CurrentThread.CurrentCulture;
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
-
+            confManager = new ConfigManager();
             UpdateLanguage();
             _alumnoBl = new AlumnoBl();
-            tipoFichero = _alumnoBl.GetActualFormat();
+            tipoFichero = confManager.GetActualFormat();
             CheckFormatMenu();
             this.dataGridAlumnos.ReadOnly = true;
             ViewData(tipoFichero);
@@ -50,20 +51,20 @@ namespace Vueling.Presentation.WinSite
             }
         }
 
-        private void ViewData(Enums.TipoFichero tipo)
+        private void ViewData(TipoFichero tipo)
         {
             switch (tipo)
             {
-                case Enums.TipoFichero.TXT:
+                case TipoFichero.TXT:
                     dataGridAlumnos.DataSource = ListadoAlumnosTxt.Instance.GetListValues();
                     dataGridAlumnos.Update();
                     break;
-                case Enums.TipoFichero.JSON:
+                case TipoFichero.JSON:
                     dataGridAlumnos.DataSource = ListadoAlumnosJson.Instance.GetListValues();
                     dataGridAlumnos.Update();
                     break;
 
-                case Enums.TipoFichero.XML:
+                case TipoFichero.XML:
                     dataGridAlumnos.DataSource = ListadoAlumnosXml.Instance.GetListValues();
                     dataGridAlumnos.Update();
                     break;
@@ -101,14 +102,14 @@ namespace Vueling.Presentation.WinSite
 
                 switch (tipoFichero)
                 {
-                    case Enums.TipoFichero.TXT:
+                    case TipoFichero.TXT:
                         var queryTxt =
                             from Alumno item in ListadoAlumnosTxt.Instance.GetListValues()
                             where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                             select item;
                         dataGridAlumnos.DataSource = queryTxt.ToList(); dataGridAlumnos.Update();
                         break;
-                    case Enums.TipoFichero.JSON:
+                    case TipoFichero.JSON:
                         var queryJson =
                             from Alumno item in ListadoAlumnosJson.Instance.GetListValues()
                             where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
@@ -118,7 +119,7 @@ namespace Vueling.Presentation.WinSite
                         dataGridAlumnos.Update();
                         break;
 
-                    case Enums.TipoFichero.XML:
+                    case TipoFichero.XML:
                         var queryXml =
                             from Alumno item in ListadoAlumnosXml.Instance.GetListValues()
                             where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
@@ -149,16 +150,16 @@ namespace Vueling.Presentation.WinSite
         {
 
 
-            switch (_alumnoBl.GetActualFormat())
+            switch (confManager.GetActualFormat())
             {
-                case Enums.TipoFichero.TXT:
+                case TipoFichero.TXT:
                     this.txtFormatAlShowForm.Checked = true;
                     break;
-                case Enums.TipoFichero.JSON:
+                case TipoFichero.JSON:
                     this.jsonFormatAlShowForm.Checked = true;
                     break;
 
-                case Enums.TipoFichero.XML:
+                case TipoFichero.XML:
                     this.xmlFormatAlShowForm.Checked = true;
                     break;
 
@@ -182,8 +183,8 @@ namespace Vueling.Presentation.WinSite
             this.txtFormatAlShowForm.Checked = true;
             this.jsonFormatAlShowForm.Checked = false;
             this.xmlFormatAlShowForm.Checked = false;
-            _alumnoBl.Formater(Enums.TipoFichero.TXT);
-            ViewData(_alumnoBl.GetActualFormat());
+            confManager.Formater(TipoFichero.TXT);
+            ViewData(confManager.GetActualFormat());
         }
 
         private void jsonFormatAlShowForm_Click(object sender, EventArgs e)
@@ -191,8 +192,8 @@ namespace Vueling.Presentation.WinSite
             this.txtFormatAlShowForm.Checked = false;
             this.jsonFormatAlShowForm.Checked = true;
             this.xmlFormatAlShowForm.Checked = false;
-            _alumnoBl.Formater(Enums.TipoFichero.JSON);
-            ViewData(_alumnoBl.GetActualFormat());
+            confManager.Formater(TipoFichero.JSON);
+            ViewData(confManager.GetActualFormat());
         }
 
         private void xmlFormatAlShowForm_Click(object sender, EventArgs e)
@@ -201,8 +202,8 @@ namespace Vueling.Presentation.WinSite
             this.txtFormatAlShowForm.Checked = false;
             this.jsonFormatAlShowForm.Checked = false;
             this.xmlFormatAlShowForm.Checked = true;
-            _alumnoBl.Formater(Enums.TipoFichero.XML);
-            ViewData(_alumnoBl.GetActualFormat());
+            confManager.Formater(TipoFichero.XML);
+            ViewData(confManager.GetActualFormat());
         }
 
         private void esItemAlShowForm_Click(object sender, EventArgs e)
@@ -211,7 +212,7 @@ namespace Vueling.Presentation.WinSite
             this.esItemAlShowForm.Checked = true;
             this.eNToolStripMenuItem.Checked = false;
             cul = CultureInfo.CreateSpecificCulture("es");
-            _alumnoBl.GrabarIdioma(Idioma.ES);
+            confManager.GrabarIdioma(Idioma.ES);
             UpdateLanguage();
         }
 
@@ -221,7 +222,7 @@ namespace Vueling.Presentation.WinSite
             this.esItemAlShowForm.Checked = false;
             this.eNToolStripMenuItem.Checked = false;
             cul = CultureInfo.CreateSpecificCulture("ca");
-            _alumnoBl.GrabarIdioma(Idioma.CAT);
+            confManager.GrabarIdioma(Idioma.CAT);
             UpdateLanguage();
         }
 
@@ -231,12 +232,12 @@ namespace Vueling.Presentation.WinSite
             this.esItemAlShowForm.Checked = false;
             this.eNToolStripMenuItem.Checked = true;
             cul = CultureInfo.CreateSpecificCulture("en");
-            _alumnoBl.GrabarIdioma(Idioma.EN);
+            confManager.GrabarIdioma(Idioma.EN);
             UpdateLanguage();
         }
         private void LoadLenguageItem()
         {
-            switch (_alumnoBl.GetActualLanguage())
+            switch (confManager.GetActualLanguage())
             {
                 case Idioma.CAT:
                     this.catItemAlShowForm.Checked = true;

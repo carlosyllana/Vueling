@@ -26,7 +26,7 @@ namespace Vueling.DataAccess.Dao
         public DAOXml()
         {
             mailer = new SendMail();
-            DocumentsManager docManager = new DocumentsManager(Enums.TipoFichero.XML);
+            DocumentsManager docManager = new DocumentsManager(TipoFichero.XML);
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
         }

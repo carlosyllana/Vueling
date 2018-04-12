@@ -12,10 +12,11 @@ namespace Vueling.Common.Logic
     {
 
         private static ListadoAlumnosJson instance = null;
-        private static List<Alumno> alumnoList = new List<Alumno>();
+        private static List<Alumno> alumnoList = null;
 
         private ListadoAlumnosJson() {
 
+            alumnoList = new List<Alumno>();
             DAOJson<Alumno> daoJson = new DAOJson<Alumno>();
             AddList(daoJson.GetList());
         }

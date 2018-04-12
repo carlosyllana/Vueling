@@ -12,14 +12,14 @@ using Vueling.Common.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.Dao;
-using static Vueling.Common.Logic.Enums;
+using static Vueling.Common.Logic.TipoFichero;
 
 namespace Vueling.Business.Logic
 {
     public class AlumnoBl : ICrudBl<Alumno> 
     {
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
-
+        private ConfigManager confManager = null;
 
         public Alumno Add(Alumno alumno)
         {
@@ -27,9 +27,10 @@ namespace Vueling.Business.Logic
             {
                 _log.Fatal("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name+ " -> " + alumno.ToString());
                 //Calcular Campos
+                confManager = new ConfigManager();
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
-                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat(GetActualFormat());
+                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
                 return doc.Add(alumno);
 
 
@@ -80,62 +81,6 @@ namespace Vueling.Business.Logic
             }
         }
 
-        public void Formater(Enums.TipoFichero tipoFichero)
-        {
-            try
-            {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name );
-                var value = (int)tipoFichero;
-                config.AppSettings.Settings["tipoFichero"].Value = value.ToString();
-                config.Save(ConfigurationSaveMode.Modified);
-            
-            }
-            catch(ConfigurationErrorsException ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
-                throw;
-
-            }
-            finally
-            {
-                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-            }
-        }
-
-        public Enums.TipoFichero GetActualFormat()
-        {
-            try
-            {
-                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                //Obtener Formato.
-                ConfigurationManager.RefreshSection("appSettings");
-                var tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoFichero"]);
-                return (Enums.TipoFichero)tipo;
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
-                throw;
-
-            }
-            catch (Exception ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al leer  en AppSettings--> " + ex.Message);
-                throw;
-            }
-            finally
-            {
-                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-            }
-        }
-
         public DateTime CalcularFechaRegistro()
         {
             return DateTime.Now.Date;
@@ -178,13 +123,13 @@ namespace Vueling.Business.Logic
             {
                 _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat(GetActualFormat());
+                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
                 //Añadir.
                 return doc.GetList();
 
 
 
-            }                     
+            }
             catch (ArgumentNullException ex)
             {
                 _log.Error("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
@@ -232,59 +177,6 @@ namespace Vueling.Business.Logic
 
         }
 
-        public Idioma GetActualLanguage()
-        {
-            try
-            {
-                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                //Obtener Formato.
-                ConfigurationManager.RefreshSection("appSettings");
-                var tipo = Int32.Parse(ConfigurationManager.AppSettings["idioma"]);
-                return (Idioma)tipo;
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
-                throw;
 
-            }
-            catch (Exception ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al leer  en AppSettings--> " + ex.Message);
-                throw;
-            }
-            finally
-            {
-                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-            }
-        }
-
-        public void GrabarIdioma(Idioma idioma)
-        {
-            try 
-               {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                var value = (int)idioma;
-                config.AppSettings.Settings["idioma"].Value = value.ToString();
-                config.Save(ConfigurationSaveMode.Modified);
-            }
-            catch (ConfigurationErrorsException ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
-                throw;
-
-            }
-            finally
-            {
-                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-            }
-        }
     }
 }

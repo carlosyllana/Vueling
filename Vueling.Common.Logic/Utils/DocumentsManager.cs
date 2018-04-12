@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Vueling.Common.Logic.Enums;
+using static Vueling.Common.Logic.TipoFichero;
 using Serilog;
 using System.Reflection;
 using Vueling.Common.Logic.Log;
@@ -16,11 +16,11 @@ namespace Vueling.Common.Logic
     public class DocumentsManager
     {
         public static String PATH;
-        private Enums.TipoFichero tipo;
+        private TipoFichero tipo;
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
         private SendMail mailer;
 
-        public DocumentsManager(Enums.TipoFichero tipo)
+        public DocumentsManager(TipoFichero tipo)
         {
             mailer = new SendMail();
             this.tipo = tipo;
