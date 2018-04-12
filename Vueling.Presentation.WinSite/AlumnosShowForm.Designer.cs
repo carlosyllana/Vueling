@@ -36,8 +36,6 @@
             this.cbCampo = new System.Windows.Forms.ComboBox();
             this.lblColumna = new System.Windows.Forms.Label();
             this.txtBuscar = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.iDiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +43,16 @@
             this.tXTToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.jSONToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.xMLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.Idioma_AlumnoShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.esItemAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.catItemAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.eNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.format_AlumnoShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.jsonFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.xmlFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblBuscar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAlumnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listadoAlumnosBindingSource)).BeginInit();
             this.menuStrip2.SuspendLayout();
@@ -106,26 +114,6 @@
             this.txtBuscar.TabIndex = 7;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(418, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Buscar:";
-            // 
-            // menuStrip2
-            // 
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iDiomaToolStripMenuItem,
-            this.formatoToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip2.TabIndex = 9;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
             // iDiomaToolStripMenuItem
             // 
             this.iDiomaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -138,16 +126,12 @@
             // eSToolStripMenuItem
             // 
             this.eSToolStripMenuItem.Name = "eSToolStripMenuItem";
-            this.eSToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            this.eSToolStripMenuItem.Text = "ES";
-            this.eSToolStripMenuItem.Click += new System.EventHandler(this.eSToolStripMenuItem_Click);
+            this.eSToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // cATToolStripMenuItem
             // 
             this.cATToolStripMenuItem.Name = "cATToolStripMenuItem";
-            this.cATToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            this.cATToolStripMenuItem.Text = "CAT";
-            this.cATToolStripMenuItem.Click += new System.EventHandler(this.cATToolStripMenuItem_Click);
+            this.cATToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // formatoToolStripMenuItem
             // 
@@ -162,31 +146,107 @@
             // tXTToolStripMenuItem1
             // 
             this.tXTToolStripMenuItem1.Name = "tXTToolStripMenuItem1";
-            this.tXTToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.tXTToolStripMenuItem1.Text = "TXT";
-            this.tXTToolStripMenuItem1.Click += new System.EventHandler(this.tXTToolStripMenuItem1_Click);
+            this.tXTToolStripMenuItem1.Size = new System.Drawing.Size(67, 22);
             // 
             // jSONToolStripMenuItem1
             // 
             this.jSONToolStripMenuItem1.Name = "jSONToolStripMenuItem1";
-            this.jSONToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.jSONToolStripMenuItem1.Text = "JSON";
-            this.jSONToolStripMenuItem1.Click += new System.EventHandler(this.jSONToolStripMenuItem1_Click);
+            this.jSONToolStripMenuItem1.Size = new System.Drawing.Size(67, 22);
             // 
             // xMLToolStripMenuItem1
             // 
             this.xMLToolStripMenuItem1.Name = "xMLToolStripMenuItem1";
-            this.xMLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.xMLToolStripMenuItem1.Text = "XML";
-            this.xMLToolStripMenuItem1.Click += new System.EventHandler(this.xMLToolStripMenuItem1_Click);
+            this.xMLToolStripMenuItem1.Size = new System.Drawing.Size(67, 22);
+            // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Idioma_AlumnoShowForm,
+            this.format_AlumnoShowForm});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip2.TabIndex = 9;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // Idioma_AlumnoShowForm
+            // 
+            this.Idioma_AlumnoShowForm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.esItemAlShowForm,
+            this.catItemAlShowForm,
+            this.eNToolStripMenuItem});
+            this.Idioma_AlumnoShowForm.Name = "Idioma_AlumnoShowForm";
+            this.Idioma_AlumnoShowForm.Size = new System.Drawing.Size(56, 20);
+            this.Idioma_AlumnoShowForm.Text = "Idioma";
+            // 
+            // esItemAlShowForm
+            // 
+            this.esItemAlShowForm.Name = "esItemAlShowForm";
+            this.esItemAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.esItemAlShowForm.Text = "ES";
+            this.esItemAlShowForm.Click += new System.EventHandler(this.esItemAlShowForm_Click);
+            // 
+            // catItemAlShowForm
+            // 
+            this.catItemAlShowForm.Name = "catItemAlShowForm";
+            this.catItemAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.catItemAlShowForm.Text = "CAT";
+            this.catItemAlShowForm.Click += new System.EventHandler(this.catItemAlShowForm_Click);
+            // 
+            // eNToolStripMenuItem
+            // 
+            this.eNToolStripMenuItem.Name = "eNToolStripMenuItem";
+            this.eNToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eNToolStripMenuItem.Text = "EN";
+            this.eNToolStripMenuItem.Click += new System.EventHandler(this.eNToolStripMenuItem_Click);
+            // 
+            // format_AlumnoShowForm
+            // 
+            this.format_AlumnoShowForm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtFormatAlShowForm,
+            this.jsonFormatAlShowForm,
+            this.xmlFormatAlShowForm});
+            this.format_AlumnoShowForm.Name = "format_AlumnoShowForm";
+            this.format_AlumnoShowForm.Size = new System.Drawing.Size(62, 20);
+            this.format_AlumnoShowForm.Text = "formato";
+            // 
+            // txtFormatAlShowForm
+            // 
+            this.txtFormatAlShowForm.Name = "txtFormatAlShowForm";
+            this.txtFormatAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.txtFormatAlShowForm.Text = "TXT";
+            this.txtFormatAlShowForm.Click += new System.EventHandler(this.txtFormatAlShowForm_Click);
+            // 
+            // jsonFormatAlShowForm
+            // 
+            this.jsonFormatAlShowForm.Name = "jsonFormatAlShowForm";
+            this.jsonFormatAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.jsonFormatAlShowForm.Text = "JSON";
+            this.jsonFormatAlShowForm.Click += new System.EventHandler(this.jsonFormatAlShowForm_Click);
+            // 
+            // xmlFormatAlShowForm
+            // 
+            this.xmlFormatAlShowForm.Name = "xmlFormatAlShowForm";
+            this.xmlFormatAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.xmlFormatAlShowForm.Text = "XML";
+            this.xmlFormatAlShowForm.Click += new System.EventHandler(this.xmlFormatAlShowForm_Click);
+            // 
+            // lblBuscar
+            // 
+            this.lblBuscar.AutoSize = true;
+            this.lblBuscar.Location = new System.Drawing.Point(433, 35);
+            this.lblBuscar.Name = "lblBuscar";
+            this.lblBuscar.Size = new System.Drawing.Size(43, 13);
+            this.lblBuscar.TabIndex = 10;
+            this.lblBuscar.Text = "Buscar:";
             // 
             // AlumnosShowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 486);
+            this.Controls.Add(this.lblBuscar);
             this.Controls.Add(this.menuStrip2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.lblColumna);
             this.Controls.Add(this.cbCampo);
@@ -213,8 +273,6 @@
         private System.Windows.Forms.ComboBox cbCampo;
         private System.Windows.Forms.Label lblColumna;
         private System.Windows.Forms.TextBox txtBuscar;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem iDiomaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cATToolStripMenuItem;
@@ -222,5 +280,15 @@
         private System.Windows.Forms.ToolStripMenuItem tXTToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem xMLToolStripMenuItem1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem Idioma_AlumnoShowForm;
+        private System.Windows.Forms.ToolStripMenuItem esItemAlShowForm;
+        private System.Windows.Forms.ToolStripMenuItem catItemAlShowForm;
+        private System.Windows.Forms.ToolStripMenuItem format_AlumnoShowForm;
+        private System.Windows.Forms.ToolStripMenuItem txtFormatAlShowForm;
+        private System.Windows.Forms.ToolStripMenuItem jsonFormatAlShowForm;
+        private System.Windows.Forms.ToolStripMenuItem xmlFormatAlShowForm;
+        private System.Windows.Forms.ToolStripMenuItem eNToolStripMenuItem;
+        private System.Windows.Forms.Label lblBuscar;
     }
 }

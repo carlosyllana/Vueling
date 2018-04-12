@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.Dao", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Common.Logic", "Vueling.Common.Logic\Vueling.Common.Logic.csproj", "{07CAF8A0-68AC-48D0-894F-656930FDF070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAcces.Dao.Test", "Vueling.DataAcces.Dao.Test\Vueling.DataAcces.Dao.Test.csproj", "{A7CBE72E-9211-4F06-8961-689AD9866EE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vueling.DataAcces.Dao.Test", "Vueling.DataAcces.Dao.Test\Vueling.DataAcces.Dao.Test.csproj", "{A7CBE72E-9211-4F06-8961-689AD9866EE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

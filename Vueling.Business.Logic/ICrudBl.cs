@@ -14,5 +14,7 @@ namespace Vueling.Business.Logic
         void Formater(Enums.TipoFichero tipoFichero);
         List<T> getList();
         Enums.TipoFichero GetActualFormat();
+        void GrabarIdioma(Idioma idioma);
+        Idioma GetActualLanguage();
     }
 }

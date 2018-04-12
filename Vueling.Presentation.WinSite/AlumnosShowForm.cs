@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,15 +21,25 @@ namespace Vueling.Presentation.WinSite
 
         private ICrudBl<Alumno> _alumnoBl;
         Enums.TipoFichero tipoFichero;
+        ResourceManager res_man;
+        CultureInfo cul;
+
         public AlumnosShowForm()
         {
             InitializeComponent();
+            cul = CultureInfo.CreateSpecificCulture("ca");
+            res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
+
+            UpdateLanguage();
             _alumnoBl = new AlumnoBl();
             tipoFichero = _alumnoBl.GetActualFormat();
             CheckFormatMenu();
             this.dataGridAlumnos.ReadOnly = true;
             ViewData(tipoFichero);
             LoadCbCampo();
+            LoadLenguageItem();
+
+
         }
 
         private void LoadCbCampo()
@@ -69,16 +82,7 @@ namespace Vueling.Presentation.WinSite
             this.Close();
         }
 
-/*
-        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.tipoFichero = (Enums.TipoFichero)this.cbTipo.SelectedIndex;
-            _alumnoBl.Formater(this.tipoFichero);
 
-            var tipo = _alumnoBl.GetActualFormat();
-            this.cbTipo.SelectedIndex = (int)tipo;
-            ViewData(tipo);
-        }*/
 
 
         private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
@@ -139,65 +143,115 @@ namespace Vueling.Presentation.WinSite
             GetLinqData(column, value);
         }
 
-        private void eSToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.eSToolStripMenuItem.Checked = true;
-            this.cATToolStripMenuItem.Checked = false;
-        }
 
-        private void cATToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.eSToolStripMenuItem.Checked = false;
-            this.cATToolStripMenuItem.Checked = true;
-        }
-
-        private void tXTToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.tXTToolStripMenuItem1.Checked = true;
-            this.jSONToolStripMenuItem1.Checked = false;
-            this.xMLToolStripMenuItem1.Checked = false;
-            _alumnoBl.Formater(Enums.TipoFichero.TXT);
-            ViewData(_alumnoBl.GetActualFormat());
-
-        }
-
-        private void jSONToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.tXTToolStripMenuItem1.Checked = false;
-            this.jSONToolStripMenuItem1.Checked = true;
-            this.xMLToolStripMenuItem1.Checked = false;
-            _alumnoBl.Formater(Enums.TipoFichero.JSON);
-            ViewData(_alumnoBl.GetActualFormat());
-
-        }
-        private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.tXTToolStripMenuItem1.Checked = false;
-            this.jSONToolStripMenuItem1.Checked = false;
-            this.xMLToolStripMenuItem1.Checked = true;
-            _alumnoBl.Formater(Enums.TipoFichero.XML);
-            ViewData(_alumnoBl.GetActualFormat());
-        }
-
+      
         private void CheckFormatMenu()
         {
 
-            
-                switch (_alumnoBl.GetActualFormat())
+
+            switch (_alumnoBl.GetActualFormat())
             {
                 case Enums.TipoFichero.TXT:
-                    this.tXTToolStripMenuItem1.Checked = true;
+                    this.txtFormatAlShowForm.Checked = true;
                     break;
                 case Enums.TipoFichero.JSON:
-                    this.jSONToolStripMenuItem1.Checked = true;
+                    this.jsonFormatAlShowForm.Checked = true;
                     break;
 
                 case Enums.TipoFichero.XML:
-                    this.xMLToolStripMenuItem1.Checked = true;
+                    this.xmlFormatAlShowForm.Checked = true;
                     break;
 
             }
 
         }
+        private void UpdateLanguage()
+        {
+            this.lblBuscar.Text = res_man.GetString("lblBuscar", cul);
+            this.lblColumna.Text = res_man.GetString("alumnoShowForm_lblColumna", cul);
+            this.btnSalir.Text = res_man.GetString("menuExit", cul);
+            this.btnMenu.Text = res_man.GetString("alumnoShowForm_btnMenu", cul);
+            this.Idioma_AlumnoShowForm.Text = res_man.GetString("menuLanguage", cul);
+            this.format_AlumnoShowForm.Text = res_man.GetString("menuFormat", cul);
+        }
+
+      
+
+        private void txtFormatAlShowForm_Click(object sender, EventArgs e)
+        {
+            this.txtFormatAlShowForm.Checked = true;
+            this.jsonFormatAlShowForm.Checked = false;
+            this.xmlFormatAlShowForm.Checked = false;
+            _alumnoBl.Formater(Enums.TipoFichero.TXT);
+            ViewData(_alumnoBl.GetActualFormat());
+        }
+
+        private void jsonFormatAlShowForm_Click(object sender, EventArgs e)
+        {
+            this.txtFormatAlShowForm.Checked = false;
+            this.jsonFormatAlShowForm.Checked = true;
+            this.xmlFormatAlShowForm.Checked = false;
+            _alumnoBl.Formater(Enums.TipoFichero.JSON);
+            ViewData(_alumnoBl.GetActualFormat());
+        }
+
+        private void xmlFormatAlShowForm_Click(object sender, EventArgs e)
+        {
+
+            this.txtFormatAlShowForm.Checked = false;
+            this.jsonFormatAlShowForm.Checked = false;
+            this.xmlFormatAlShowForm.Checked = true;
+            _alumnoBl.Formater(Enums.TipoFichero.XML);
+            ViewData(_alumnoBl.GetActualFormat());
+        }
+
+        private void esItemAlShowForm_Click(object sender, EventArgs e)
+        {
+            this.catItemAlShowForm.Checked = false;
+            this.esItemAlShowForm.Checked = true;
+            this.eNToolStripMenuItem.Checked = false;
+            cul = CultureInfo.CreateSpecificCulture("es");
+            _alumnoBl.GrabarIdioma(Idioma.ES);
+            UpdateLanguage();
+        }
+
+        private void catItemAlShowForm_Click(object sender, EventArgs e)
+        {
+            this.catItemAlShowForm.Checked = true;
+            this.esItemAlShowForm.Checked = false;
+            this.eNToolStripMenuItem.Checked = false;
+            cul = CultureInfo.CreateSpecificCulture("ca");
+            _alumnoBl.GrabarIdioma(Idioma.CAT);
+            UpdateLanguage();
+        }
+
+        private void eNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.catItemAlShowForm.Checked = false;
+            this.esItemAlShowForm.Checked = false;
+            this.eNToolStripMenuItem.Checked = true;
+            cul = CultureInfo.CreateSpecificCulture("en");
+            _alumnoBl.GrabarIdioma(Idioma.EN);
+            UpdateLanguage();
+        }
+        private void LoadLenguageItem()
+        {
+            switch (_alumnoBl.GetActualLanguage())
+            {
+                case Idioma.CAT:
+                    this.catItemAlShowForm.Checked = true;
+                    break;
+                case Idioma.ES:
+                    this.esItemAlShowForm.Checked = true;
+                    break;
+
+                case Idioma.EN:
+                    this.eNToolStripMenuItem.Checked = true;
+                    break;
+
+            }
+        }
+
+        //label1
     }
 }

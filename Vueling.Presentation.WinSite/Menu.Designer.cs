@@ -1,7 +1,12 @@
-﻿namespace Vueling.Presentation.WinSite
+﻿using System.Globalization;
+using System.Reflection;
+using System.Resources;
+
+namespace Vueling.Presentation.WinSite
 {
     partial class Menu
     {
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -33,13 +38,12 @@
             this.btnMostrar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.iDiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tXTToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.jSONToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +67,7 @@
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(239, 23);
             this.btnMostrar.TabIndex = 1;
-            this.btnMostrar.Text = "Mostrar Listado";
+            this.btnMostrar.Text = "mostrar";
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
@@ -73,7 +77,7 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(239, 23);
             this.btnSalir.TabIndex = 2;
-            this.btnSalir.Text = "Salir";
+            this.btnSalir.Text = "salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
@@ -82,17 +86,9 @@
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Location = new System.Drawing.Point(85, 48);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(96, 13);
+            this.lblTitulo.Size = new System.Drawing.Size(33, 13);
             this.lblTitulo.TabIndex = 3;
-            this.lblTitulo.Text = "Gestor de Alumnos";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 24);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(263, 24);
-            this.menuStrip1.TabIndex = 4;
-            this.menuStrip1.Text = "menuStrip1";
+            this.lblTitulo.Text = "Titulo";
             // 
             // contextMenuStrip1
             // 
@@ -114,11 +110,11 @@
             // 
             this.iDiomaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eSToolStripMenuItem,
-            this.cATToolStripMenuItem});
+            this.cATToolStripMenuItem,
+            this.eNToolStripMenuItem});
             this.iDiomaToolStripMenuItem.Name = "iDiomaToolStripMenuItem";
             this.iDiomaToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.iDiomaToolStripMenuItem.Text = "Idioma";
-            this.iDiomaToolStripMenuItem.Click += new System.EventHandler(this.iDiomaToolStripMenuItem_Click);
             // 
             // eSToolStripMenuItem
             // 
@@ -134,6 +130,13 @@
             this.cATToolStripMenuItem.Text = "CAT";
             this.cATToolStripMenuItem.Click += new System.EventHandler(this.cATToolStripMenuItem_Click);
             // 
+            // eNToolStripMenuItem
+            // 
+            this.eNToolStripMenuItem.Name = "eNToolStripMenuItem";
+            this.eNToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eNToolStripMenuItem.Text = "EN";
+            this.eNToolStripMenuItem.Click += new System.EventHandler(this.eNToolStripMenuItem_Click);
+            // 
             // formatoToolStripMenuItem
             // 
             this.formatoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -141,8 +144,8 @@
             this.jSONToolStripMenuItem1,
             this.xMLToolStripMenuItem1});
             this.formatoToolStripMenuItem.Name = "formatoToolStripMenuItem";
-            this.formatoToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.formatoToolStripMenuItem.Text = "Formato";
+            this.formatoToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.formatoToolStripMenuItem.Text = "formato";
             // 
             // tXTToolStripMenuItem1
             // 
@@ -174,9 +177,7 @@
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnMostrar);
             this.Controls.Add(this.btnAñadir);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.menuStrip2);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Menu";
             this.Text = "Menu";
             this.menuStrip2.ResumeLayout(false);
@@ -192,7 +193,6 @@
         private System.Windows.Forms.Button btnMostrar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sqlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jsonToolStripMenuItem;
@@ -206,5 +206,6 @@
         private System.Windows.Forms.ToolStripMenuItem tXTToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem xMLToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem eNToolStripMenuItem;
     }
 }

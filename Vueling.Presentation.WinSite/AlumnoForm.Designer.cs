@@ -44,7 +44,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.iDiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cATToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +51,17 @@
             this.tXTToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.jSONToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.xMLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.esAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.catAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.jsonAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.xmlAlumnoForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.eNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.upId)).BeginInit();
-            this.menuStrip2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnJson
@@ -189,17 +197,6 @@
             this.btnMenu.UseVisualStyleBackColor = true;
             this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // menuStrip2
-            // 
-            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iDiomaToolStripMenuItem,
-            this.formatoToolStripMenuItem});
-            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(271, 24);
-            this.menuStrip2.TabIndex = 17;
-            this.menuStrip2.Text = "menuStrip2";
-            // 
             // iDiomaToolStripMenuItem
             // 
             this.iDiomaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -225,10 +222,6 @@
             // 
             // formatoToolStripMenuItem
             // 
-            this.formatoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tXTToolStripMenuItem1,
-            this.jSONToolStripMenuItem1,
-            this.xMLToolStripMenuItem1});
             this.formatoToolStripMenuItem.Name = "formatoToolStripMenuItem";
             this.formatoToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.formatoToolStripMenuItem.Text = "Formato";
@@ -236,30 +229,103 @@
             // tXTToolStripMenuItem1
             // 
             this.tXTToolStripMenuItem1.Name = "tXTToolStripMenuItem1";
-            this.tXTToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
+            this.tXTToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.tXTToolStripMenuItem1.Text = "TXT";
             this.tXTToolStripMenuItem1.Click += new System.EventHandler(this.tXTToolStripMenuItem1_Click);
             // 
             // jSONToolStripMenuItem1
             // 
             this.jSONToolStripMenuItem1.Name = "jSONToolStripMenuItem1";
-            this.jSONToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
+            this.jSONToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.jSONToolStripMenuItem1.Text = "JSON";
             this.jSONToolStripMenuItem1.Click += new System.EventHandler(this.jSONToolStripMenuItem1_Click);
             // 
             // xMLToolStripMenuItem1
             // 
             this.xMLToolStripMenuItem1.Name = "xMLToolStripMenuItem1";
-            this.xMLToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
+            this.xMLToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.xMLToolStripMenuItem1.Text = "XML";
             this.xMLToolStripMenuItem1.Click += new System.EventHandler(this.xMLToolStripMenuItem1_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem4});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(271, 24);
+            this.menuStrip1.TabIndex = 20;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.esAlumnoForm,
+            this.catAlumnoForm,
+            this.eNToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(56, 20);
+            this.toolStripMenuItem1.Text = "Idioma";
+            // 
+            // esAlumnoForm
+            // 
+            this.esAlumnoForm.Name = "esAlumnoForm";
+            this.esAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.esAlumnoForm.Text = "ES";
+            this.esAlumnoForm.Click += new System.EventHandler(this.esAlumnoForm_Click);
+            // 
+            // catAlumnoForm
+            // 
+            this.catAlumnoForm.Name = "catAlumnoForm";
+            this.catAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.catAlumnoForm.Text = "CAT";
+            this.catAlumnoForm.Click += new System.EventHandler(this.catAlumnoForm_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtAlumnoForm,
+            this.jsonAlumnoForm,
+            this.xmlAlumnoForm});
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(62, 20);
+            this.toolStripMenuItem4.Text = "formato";
+            // 
+            // txtAlumnoForm
+            // 
+            this.txtAlumnoForm.Name = "txtAlumnoForm";
+            this.txtAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.txtAlumnoForm.Text = "TXT";
+            this.txtAlumnoForm.Click += new System.EventHandler(this.txtAlumnoForm_Click);
+            // 
+            // jsonAlumnoForm
+            // 
+            this.jsonAlumnoForm.Name = "jsonAlumnoForm";
+            this.jsonAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.jsonAlumnoForm.Text = "JSON";
+            this.jsonAlumnoForm.Click += new System.EventHandler(this.jsonAlumnoForm_Click);
+            // 
+            // xmlAlumnoForm
+            // 
+            this.xmlAlumnoForm.Name = "xmlAlumnoForm";
+            this.xmlAlumnoForm.Size = new System.Drawing.Size(180, 22);
+            this.xmlAlumnoForm.Text = "XML";
+            this.xmlAlumnoForm.Click += new System.EventHandler(this.xmlAlumnoForm_Click);
+            // 
+            // eNToolStripMenuItem
+            // 
+            this.eNToolStripMenuItem.Name = "eNToolStripMenuItem";
+            this.eNToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eNToolStripMenuItem.Text = "EN";
+            this.eNToolStripMenuItem.Click += new System.EventHandler(this.eNToolStripMenuItem_Click);
             // 
             // AlumnoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(271, 367);
-            this.Controls.Add(this.menuStrip2);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.button1);
@@ -279,8 +345,8 @@
             this.Name = "AlumnoForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.upId)).EndInit();
-            this.menuStrip2.ResumeLayout(false);
-            this.menuStrip2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -304,7 +370,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem iDiomaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cATToolStripMenuItem;
@@ -312,6 +377,15 @@
         private System.Windows.Forms.ToolStripMenuItem tXTToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem xMLToolStripMenuItem1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem esAlumnoForm;
+        private System.Windows.Forms.ToolStripMenuItem catAlumnoForm;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem txtAlumnoForm;
+        private System.Windows.Forms.ToolStripMenuItem jsonAlumnoForm;
+        private System.Windows.Forms.ToolStripMenuItem xmlAlumnoForm;
+        private System.Windows.Forms.ToolStripMenuItem eNToolStripMenuItem;
     }
 }
 

@@ -117,10 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
-  <metadata name="menuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>287, 17</value>
-  </metadata>
+  <data name="alumnoForm_lblApellido" xml:space="preserve">
+    <value>Apellidos:</value>
+  </data>
+  <data name="alumnoForm_lblDni" xml:space="preserve">
+    <value>DNI:</value>
+  </data>
+  <data name="alumnoForm_lblFechaDeNacimiento" xml:space="preserve">
+    <value>Fecha de Nacimiento:</value>
+  </data>
+  <data name="alumnoForm_lblId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="alumnoForm_lblNombre" xml:space="preserve">
+    <value>Nombre:</value>
+  </data>
+  <data name="alumnoShowForm_btnMenu" xml:space="preserve">
+    <value>Volver al Menú</value>
+  </data>
+  <data name="alumnoShowForm_lblColumna" xml:space="preserve">
+    <value>Columna</value>
+  </data>
+  <data name="lblBuscar" xml:space="preserve">
+    <value>Buscar:</value>
+  </data>
+  <data name="menuAdd" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="menuExit" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="menuFormat" xml:space="preserve">
+    <value>Formato</value>
+  </data>
+  <data name="menuLanguage" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="menuShowList" xml:space="preserve">
+    <value>Mostrar Listado</value>
+  </data>
+  <data name="menuTitle" xml:space="preserve">
+    <value>Gestor de Alumnos</value>
+  </data>
 </root>
