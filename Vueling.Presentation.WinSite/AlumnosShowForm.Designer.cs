@@ -52,8 +52,8 @@
             this.txtFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
             this.jsonFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
             this.xmlFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblBuscar = new System.Windows.Forms.Label();
             this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblBuscar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAlumnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listadoAlumnosBindingSource)).BeginInit();
             this.menuStrip2.SuspendLayout();
@@ -209,8 +209,8 @@
             this.xmlFormatAlShowForm,
             this.sQLToolStripMenuItem});
             this.format_AlumnoShowForm.Name = "format_AlumnoShowForm";
-            this.format_AlumnoShowForm.Size = new System.Drawing.Size(62, 20);
-            this.format_AlumnoShowForm.Text = "formato";
+            this.format_AlumnoShowForm.Size = new System.Drawing.Size(64, 20);
+            this.format_AlumnoShowForm.Text = "Formato";
             // 
             // txtFormatAlShowForm
             // 
@@ -233,6 +233,13 @@
             this.xmlFormatAlShowForm.Text = "XML";
             this.xmlFormatAlShowForm.Click += new System.EventHandler(this.xmlFormatAlShowForm_Click);
             // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sQLToolStripMenuItem.Text = "SQL";
+            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
+            // 
             // lblBuscar
             // 
             this.lblBuscar.AutoSize = true;
@@ -241,13 +248,6 @@
             this.lblBuscar.Size = new System.Drawing.Size(43, 13);
             this.lblBuscar.TabIndex = 10;
             this.lblBuscar.Text = "Buscar:";
-            // 
-            // sQLToolStripMenuItem
-            // 
-            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
-            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sQLToolStripMenuItem.Text = "SQL";
-            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
             // 
             // AlumnosShowForm
             // 

@@ -132,8 +132,11 @@ namespace Vueling.Presentation.WinSite
                         dataGridAlumnos.Update();
                         break;
                     case TipoFichero.SQL:
-
-                        dataGridAlumnos.DataSource = _alumnoBl.getList();
+                        var querySQL =
+                                        from Alumno item in _alumnoBl.getList()
+                                        where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
+                                        select item;
+                        dataGridAlumnos.DataSource = querySQL.ToList();
                         dataGridAlumnos.Update();
                         break;
 
