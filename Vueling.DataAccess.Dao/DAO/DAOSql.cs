@@ -51,7 +51,7 @@ namespace Vueling.DataAccess.Dao.DAO
 
         public List<T> GetList()
         {
-            return _db.GetTable<T>().ToList<T>();
+            return GetAll().Cast<T>().ToList<T>();
         }
 
         public virtual IQueryable<T> GetAll()

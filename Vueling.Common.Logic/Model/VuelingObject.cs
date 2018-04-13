@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
+
+
     public class VuelingObject
     {
         [Column(IsPrimaryKey = true)]

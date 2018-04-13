@@ -10,8 +10,10 @@ namespace Vueling.Common.Logic.Model
     [Table(Name = "Alumno")]
     public class Alumno : VuelingObject 
     {
-        [Column]
 
+        public Guid Guid { get; set; }
+
+        [Column]
         public int Id { get; set; }
         [Column]
         public String Nombre { get; set; }
