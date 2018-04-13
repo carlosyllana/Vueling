@@ -10,7 +10,8 @@ namespace Vueling.Common.Logic
     {
             TXT = 0,
             JSON = 1,
-            XML = 2
+            XML = 2,
+            SQL= 3
 
     }
 }

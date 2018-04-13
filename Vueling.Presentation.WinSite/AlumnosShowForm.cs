@@ -68,6 +68,10 @@ namespace Vueling.Presentation.WinSite
                     dataGridAlumnos.DataSource = ListadoAlumnosXml.Instance.GetListValues();
                     dataGridAlumnos.Update();
                     break;
+                case TipoFichero.SQL:
+                    dataGridAlumnos.DataSource = _alumnoBl.getList();
+                    dataGridAlumnos.Update();
+                    break;
 
             }
         }
@@ -127,6 +131,11 @@ namespace Vueling.Presentation.WinSite
                         dataGridAlumnos.DataSource = queryXml.ToList();
                         dataGridAlumnos.Update();
                         break;
+                    case TipoFichero.SQL:
+
+                        dataGridAlumnos.DataSource = _alumnoBl.getList();
+                        dataGridAlumnos.Update();
+                        break;
 
                 }
             }
@@ -161,6 +170,9 @@ namespace Vueling.Presentation.WinSite
 
                 case TipoFichero.XML:
                     this.xmlFormatAlShowForm.Checked = true;
+                    break;
+                case TipoFichero.SQL:
+                    this.sQLToolStripMenuItem.Checked = true;
                     break;
 
             }
@@ -251,6 +263,15 @@ namespace Vueling.Presentation.WinSite
                     break;
 
             }
+        }
+
+        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.txtFormatAlShowForm.Checked = false;
+            this.jsonFormatAlShowForm.Checked = false;
+            this.xmlFormatAlShowForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = true;
+            confManager.Formater(TipoFichero.SQL);
         }
 
         //label1

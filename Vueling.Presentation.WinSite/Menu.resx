@@ -258,22 +258,28 @@
     <value>Idioma</value>
   </data>
   <data name="tXTToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tXTToolStripMenuItem1.Text" xml:space="preserve">
     <value>TXT</value>
   </data>
   <data name="jSONToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="jSONToolStripMenuItem1.Text" xml:space="preserve">
     <value>JSON</value>
   </data>
   <data name="xMLToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="xMLToolStripMenuItem1.Text" xml:space="preserve">
     <value>XML</value>
+  </data>
+  <data name="sqlItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="sqlItem.Text" xml:space="preserve">
+    <value>SQL</value>
   </data>
   <data name="formatoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
@@ -363,6 +369,12 @@
     <value>xMLToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;xMLToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sqlItem.Name" xml:space="preserve">
+    <value>sqlItem</value>
+  </data>
+  <data name="&gt;&gt;sqlItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

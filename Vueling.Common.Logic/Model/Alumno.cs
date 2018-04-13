@@ -1,13 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
+    [Table(Name = "Alumno")]
     public class Alumno : VuelingObject 
     {
+        [Column]
+
+        public int Id { get; set; }
+        [Column]
+        public String Nombre { get; set; }
+
+        //[Column(Storage = "Apellido")]
+        [Column]
+        public String Apellido { get; set; }
+
+        //[Column(Storage = "Dni")]
+        [Column]
+        public String Dni { get; set; }
+
+        //[Column(Storage = "FechaNacimiento")]
+        [Column]
+        public DateTime FechaNacimiento { get; set; }
+
+        //[Column(Storage = "Edad")]
+        [Column]
+        public int Edad { get; set; }
+
+        //[Column(Storage = "FechaRegistro")]
+        [Column]
+        public DateTime FechaRegistro { get; set; }
 
         public Alumno(string guid, string id, string nombre, string apellidos, string dni, string fechaDeNacimiento, string edad, string fechaDeRegistro)
         {
@@ -33,17 +60,8 @@ namespace Vueling.Common.Logic.Model
             Edad = edad;
         }
 
-        //public Guid Guid { get; set; }
-        public int Id { get; set; }
-        public String Nombre { get; set; }
-        public String Apellido { get; set; }
-        public String Dni { get; set; }
-        public DateTime  FechaNacimiento { get; set; }
-        public int Edad { get; set; }
-        public DateTime FechaRegistro { get; set; }
-        //Fecha de nacimiento.
-        //Edad (calculado)
-        //Fecha hora de registro.
+
+
 
         public Alumno()
         {

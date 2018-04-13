@@ -53,6 +53,7 @@
             this.jsonFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
             this.xmlFormatAlShowForm = new System.Windows.Forms.ToolStripMenuItem();
             this.lblBuscar = new System.Windows.Forms.Label();
+            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAlumnos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.listadoAlumnosBindingSource)).BeginInit();
             this.menuStrip2.SuspendLayout();
@@ -182,21 +183,21 @@
             // esItemAlShowForm
             // 
             this.esItemAlShowForm.Name = "esItemAlShowForm";
-            this.esItemAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.esItemAlShowForm.Size = new System.Drawing.Size(96, 22);
             this.esItemAlShowForm.Text = "ES";
             this.esItemAlShowForm.Click += new System.EventHandler(this.esItemAlShowForm_Click);
             // 
             // catItemAlShowForm
             // 
             this.catItemAlShowForm.Name = "catItemAlShowForm";
-            this.catItemAlShowForm.Size = new System.Drawing.Size(180, 22);
+            this.catItemAlShowForm.Size = new System.Drawing.Size(96, 22);
             this.catItemAlShowForm.Text = "CAT";
             this.catItemAlShowForm.Click += new System.EventHandler(this.catItemAlShowForm_Click);
             // 
             // eNToolStripMenuItem
             // 
             this.eNToolStripMenuItem.Name = "eNToolStripMenuItem";
-            this.eNToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eNToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.eNToolStripMenuItem.Text = "EN";
             this.eNToolStripMenuItem.Click += new System.EventHandler(this.eNToolStripMenuItem_Click);
             // 
@@ -205,7 +206,8 @@
             this.format_AlumnoShowForm.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtFormatAlShowForm,
             this.jsonFormatAlShowForm,
-            this.xmlFormatAlShowForm});
+            this.xmlFormatAlShowForm,
+            this.sQLToolStripMenuItem});
             this.format_AlumnoShowForm.Name = "format_AlumnoShowForm";
             this.format_AlumnoShowForm.Size = new System.Drawing.Size(62, 20);
             this.format_AlumnoShowForm.Text = "formato";
@@ -239,6 +241,13 @@
             this.lblBuscar.Size = new System.Drawing.Size(43, 13);
             this.lblBuscar.TabIndex = 10;
             this.lblBuscar.Text = "Buscar:";
+            // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sQLToolStripMenuItem.Text = "SQL";
+            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
             // 
             // AlumnosShowForm
             // 
@@ -290,5 +299,6 @@
         private System.Windows.Forms.ToolStripMenuItem xmlFormatAlShowForm;
         private System.Windows.Forms.ToolStripMenuItem eNToolStripMenuItem;
         private System.Windows.Forms.Label lblBuscar;
+        private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
     }
 }

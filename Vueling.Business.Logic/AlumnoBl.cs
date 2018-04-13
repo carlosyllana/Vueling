@@ -125,7 +125,8 @@ namespace Vueling.Business.Logic
 
                 IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
                 //Añadir.
-                return doc.GetList();
+                var a = doc.GetList();
+                return a;
 
 
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
+using Vueling.DataAccess.Dao.DAO;
 
 namespace Vueling.DataAccess.Dao
 {
@@ -25,6 +26,8 @@ namespace Vueling.DataAccess.Dao
                     return new DAOJson<T>();
                 case TipoFichero.XML:
                     return new DAOXml<T>();
+                case TipoFichero.SQL:
+                    return new DAOSql<T>();
                 default:
                     return null;
             }

@@ -49,6 +49,7 @@ namespace Vueling.Presentation.WinSite
             this.tXTToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.jSONToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.xMLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.sqlItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,7 +124,8 @@ namespace Vueling.Presentation.WinSite
             this.formatoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tXTToolStripMenuItem1,
             this.jSONToolStripMenuItem1,
-            this.xMLToolStripMenuItem1});
+            this.xMLToolStripMenuItem1,
+            this.sqlItem});
             this.formatoToolStripMenuItem.Name = "formatoToolStripMenuItem";
             resources.ApplyResources(this.formatoToolStripMenuItem, "formatoToolStripMenuItem");
             // 
@@ -144,6 +146,12 @@ namespace Vueling.Presentation.WinSite
             this.xMLToolStripMenuItem1.Name = "xMLToolStripMenuItem1";
             resources.ApplyResources(this.xMLToolStripMenuItem1, "xMLToolStripMenuItem1");
             this.xMLToolStripMenuItem1.Click += new System.EventHandler(this.xMLToolStripMenuItem1_Click);
+            // 
+            // sqlItem
+            // 
+            this.sqlItem.Name = "sqlItem";
+            resources.ApplyResources(this.sqlItem, "sqlItem");
+            this.sqlItem.Click += new System.EventHandler(this.sqlItem_Click);
             // 
             // Menu
             // 
@@ -182,5 +190,6 @@ namespace Vueling.Presentation.WinSite
         private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem xMLToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem eNToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sqlItem;
     }
 }
