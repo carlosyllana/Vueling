@@ -45,6 +45,10 @@ namespace Vueling.Presentation.WinSite
             //Log.Debug("Erro");
             .WriteTo.Console()
             .CreateLogger();
+
+            Log.Information("sadasd");
+
+
             Application.Run(new Menu());
 
         }

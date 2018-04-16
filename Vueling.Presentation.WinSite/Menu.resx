@@ -282,10 +282,10 @@
     <value>SQL</value>
   </data>
   <data name="formatoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 20</value>
+    <value>64, 20</value>
   </data>
   <data name="formatoToolStripMenuItem.Text" xml:space="preserve">
-    <value>formato</value>
+    <value>Formato</value>
   </data>
   <data name="menuStrip2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

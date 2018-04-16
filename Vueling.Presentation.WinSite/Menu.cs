@@ -30,10 +30,12 @@ namespace Vueling.Presentation.WinSite
         {
             _alumnoBl = new AlumnoBl();
             confManager = new ConfigManager();
-            InitializeComponent();
-            LoadList();
             cul = CultureInfo.CreateSpecificCulture("ca");
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
+
+            InitializeComponent();
+            LoadList();
+           
             CheckFormatMenu();
             LoadLenguageItem();
             UpdateLanguage();

@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Vueling.Business.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.Dao.DAO.SQL;
@@ -17,11 +18,12 @@ namespace Vueling.DataAccess.Dao.DAO
     {
         private readonly IVuelingLogger _log = null;
         private DataContext _db;
+        private ConfigManager configManager = null;
 
         public DAOSql()
         {
-
-            _db = new DataContext("Data Source=AM-BCN-POR-204;Initial Catalog=VuelingDB;User ID=sa;Password=Npmmamt-1");
+            configManager = new ConfigManager();
+            _db = new DataContext(configManager.GetStringConnexion());
             //_db = new DataContext("‪C:\\CursoSqlServer2017\\Data\\VuelingDB.mdf");
             _db.DeferredLoadingEnabled = false;
         }
@@ -41,7 +43,7 @@ namespace Vueling.DataAccess.Dao.DAO
 
         public T Select(Guid guid)
         {
-            IQueryable<T> list = _db.GetTable<T>();
+            IQueryable<T> list = _db.GetTable<Alumno>().OfType<T>();
             var query = from item in list
                         where item.Guid == guid
                         select item;
@@ -51,7 +53,13 @@ namespace Vueling.DataAccess.Dao.DAO
 
         public List<T> GetList()
         {
-            return GetAll().Cast<T>().ToList<T>();
+
+            IQueryable<T> list = _db.GetTable<T>();
+            var query = from item in list
+                        where true == true
+                        select item;
+            var a = query.ToList();
+            return query.ToList();
         }
 
         public virtual IQueryable<T> GetAll()

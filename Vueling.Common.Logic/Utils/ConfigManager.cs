@@ -132,5 +132,31 @@ namespace Vueling.Business.Logic
                 _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
             }
         }
+        public String GetStringConnexion()
+        {
+            try
+            {
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                //Obtener Formato.
+                ConfigurationManager.RefreshSection("appSettings");
+                return (ConfigurationManager.AppSettings["SQLStringCon"]);
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
+                throw;
+
+            }
+            catch (Exception ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al leer  en AppSettings--> " + ex.Message);
+                throw;
+            }
+            finally
+            {
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+        }
+
     }
 }

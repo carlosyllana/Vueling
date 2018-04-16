@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Vueling.Common.Logic.Model
 {
+
     [Table(Name = "Alumno")]
     public class Alumno : VuelingObject 
     {
-
-        public Guid Guid { get; set; }
+        [Column(IsPrimaryKey = true)]
+        public override Guid Guid { get ; set; }
 
         [Column]
         public int Id { get; set; }
@@ -38,9 +39,12 @@ namespace Vueling.Common.Logic.Model
         [Column]
         public DateTime FechaRegistro { get; set; }
 
+
+        
+
         public Alumno(string guid, string id, string nombre, string apellidos, string dni, string fechaDeNacimiento, string edad, string fechaDeRegistro)
+       // :base(Guid.Parse(guid))
         {
-            Guid = Guid.Parse(guid);
             Id = Convert.ToInt32(id);
             Nombre = nombre;
             Apellido = apellidos;
@@ -48,11 +52,14 @@ namespace Vueling.Common.Logic.Model
             FechaNacimiento = DateTime.Parse(fechaDeNacimiento).Date;
             FechaRegistro = DateTime.Parse(fechaDeRegistro).Date;
             Edad = Convert.ToInt32(edad);
+            
         }
 
         public Alumno(Guid guid, int id, string nombre, string apellidos, string dni, DateTime fechaDeNacimiento, int edad, DateTime fechaDeRegistro)
         {
-            Guid = guid;
+
+            //Cambiar a base.
+            this.Guid = guid;
             Id = id;
             Nombre = nombre;
             Apellido = apellidos;
@@ -66,6 +73,7 @@ namespace Vueling.Common.Logic.Model
 
 
         public Alumno()
+        //:base()
         {
             this.Guid = Guid.NewGuid();
         }
@@ -73,6 +81,7 @@ namespace Vueling.Common.Logic.Model
         
 
         public Alumno(Guid guid, int id, string nombre, string apellido, string dni, DateTime fechaNacimiento)
+        //:base(guid )
         {
             this.Guid = guid;
             this.Id = id;
