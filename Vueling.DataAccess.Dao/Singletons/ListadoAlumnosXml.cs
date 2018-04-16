@@ -16,62 +16,33 @@ namespace Vueling.Common.Logic
 
         private static ListadoAlumnosXml instance =null;
         private static List<Alumno> alumnoList = new List<Alumno>();
-        private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly object padlock = new object();
         private ListadoAlumnosXml(){
 
             DAOXml<Alumno> daoXml = new DAOXml<Alumno>();
-            AddList(daoXml.GetList());
+            alumnoList = daoXml.GetList();
+        }
+
+        public List<Alumno> GetList()
+        {
+            return alumnoList;
         }
 
         public static ListadoAlumnosXml Instance{
             get
             {
-                lock (alumnoList)
+                if (instance == null)
                 {
-                    if (instance == null)
-                        instance = new ListadoAlumnosXml();
-                    return instance;
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                            instance = new ListadoAlumnosXml();
+                        return instance;
+                    }
                 }
+                return instance;
             }
 
         }
-
-        public void AddAlumno(Alumno alumno)
-        {
-            alumnoList.Add(alumno);
-        }
-        public void AddList(List<Alumno> listAl)
-        {
-            try
-            {
-                _log.Debug("Inicio AddList ListadoAlumnosXml");
-                foreach (var item in listAl)
-                {
-                    alumnoList.Add(item);
-                }
-            }
-            catch(NullReferenceException e)
-            {
-                _log.Debug("Lista Vacia AddList ERROR:" + e);
-                throw;
-            }
-            finally
-            {
-                _log.Debug("Fin AddList ListadoAlumnosXml");
-            }
-
-        }
-
-        public bool ContainsAlumno(Alumno alumno)
-        {
-            return alumnoList.Contains(alumno);
-        }
-
-        public List<Alumno> GetListValues()
-        {
-            return alumnoList;
-        }
-
-
-    }
+     }
 }

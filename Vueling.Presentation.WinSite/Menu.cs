@@ -28,16 +28,17 @@ namespace Vueling.Presentation.WinSite
 
         public Menu()
         {
-            _alumnoBl = new AlumnoBl();
-            confManager = new ConfigManager();
+          
             cul = CultureInfo.CreateSpecificCulture("ca");
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
 
             InitializeComponent();
-            LoadList();
-           
-            CheckFormatMenu();
-            LoadLenguageItem();
+            _alumnoBl = new AlumnoBl();
+            confManager = new ConfigManager();
+            //Comprobamos el menú
+            CheckFormatMenuItem();
+            CheckLanguageMenuItem();
+            //Actualizamos componentes
             UpdateLanguage();
         }
 
@@ -64,27 +65,24 @@ namespace Vueling.Presentation.WinSite
             this.Close();
         }
 
-        private void LoadList()
+        private void UpdateLanguage()
         {
-            ListadoAlumnosXml listXml = ListadoAlumnosXml.Instance;
-            ListadoAlumnosTxt listTxt = ListadoAlumnosTxt.Instance;
-            ListadoAlumnosJson listJson = ListadoAlumnosJson.Instance;
-            ICrudBl<Alumno> lBussines = new AlumnoBl();
-            confManager.Formater(TipoFichero.TXT);
-            listTxt.AddList(lBussines.getList());
-            confManager.Formater(TipoFichero.XML);
-            listXml.AddList(lBussines.getList());
-            confManager.Formater(TipoFichero.JSON);
-            listJson.AddList(lBussines.getList());
-
+            this.lblTitulo.Text = res_man.GetString("menuTitle", cul);
+            this.btnMostrar.Text = res_man.GetString("menuShowList", cul);
+            this.btnSalir.Text = res_man.GetString("menuExit", cul);
+            this.btnAñadir.Text = res_man.GetString("menuAdd", cul);
+            this.iDiomaToolStripMenuItem.Text = res_man.GetString("menuLanguage", cul);
+            this.formatoToolStripMenuItem.Text = res_man.GetString("menuFormat", cul);
         }
 
+
+        #region Language Menu Item
         private void eSToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.eSToolStripMenuItem.Checked = true;
             this.cATToolStripMenuItem.Checked = false;
             this.eNToolStripMenuItem.Checked = false;
-           cul = CultureInfo.CreateSpecificCulture("es");
+            cul = CultureInfo.CreateSpecificCulture("es");
             confManager.GrabarIdioma(Idioma.ES);
             UpdateLanguage();
         }
@@ -92,13 +90,47 @@ namespace Vueling.Presentation.WinSite
         private void cATToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.eNToolStripMenuItem.Checked = false;
-           this.eSToolStripMenuItem.Checked = false;
+            this.eSToolStripMenuItem.Checked = false;
             this.cATToolStripMenuItem.Checked = true;
             cul = CultureInfo.CreateSpecificCulture("ca");
             confManager.GrabarIdioma(Idioma.CAT);
             UpdateLanguage();
         }
 
+        private void eNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.eSToolStripMenuItem.Checked = false;
+            this.cATToolStripMenuItem.Checked = false;
+            this.eNToolStripMenuItem.Checked = true;
+            cul = CultureInfo.CreateSpecificCulture("en");
+            confManager.GrabarIdioma(Idioma.EN);
+
+            UpdateLanguage();
+        }
+
+
+
+
+        private void CheckLanguageMenuItem()
+        {
+            switch (confManager.GetActualLanguage())
+            {
+                case Idioma.CAT:
+                    this.cATToolStripMenuItem.Checked = true;
+                    break;
+                case Idioma.ES:
+                    this.eSToolStripMenuItem.Checked = true;
+                    break;
+
+                case Idioma.EN:
+                    this.eNToolStripMenuItem.Checked = true;
+                    break;
+
+            }
+        } 
+        #endregion
+
+        #region Format Menu Item
         private void tXTToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.tXTToolStripMenuItem1.Checked = true;
@@ -136,37 +168,8 @@ namespace Vueling.Presentation.WinSite
             confManager.Formater(TipoFichero.SQL);
         }
 
-        private void UpdateLanguage()
+        private void CheckFormatMenuItem()
         {
-            this.lblTitulo.Text = res_man.GetString("menuTitle", cul);
-            this.btnMostrar.Text = res_man.GetString("menuShowList", cul);
-            this.btnSalir.Text = res_man.GetString("menuExit", cul);
-            this.btnAñadir.Text = res_man.GetString("menuAdd", cul);
-            this.iDiomaToolStripMenuItem.Text = res_man.GetString("menuLanguage", cul);
-            this.formatoToolStripMenuItem.Text = res_man.GetString("menuFormat", cul);
-        }
-
-        private void LoadLenguageItem()
-        {
-            switch (confManager.GetActualLanguage())
-            {
-                case Idioma.CAT:
-                    this.cATToolStripMenuItem.Checked = true;
-                    break;
-                case Idioma.ES:
-                    this.eSToolStripMenuItem.Checked = true;
-                    break;
-
-                case Idioma.EN:
-                    this.eNToolStripMenuItem.Checked = true;
-                    break;
-
-            }
-        }
-
-        private void CheckFormatMenu()
-        {
-
 
             switch (confManager.GetActualFormat())
             {
@@ -185,18 +188,10 @@ namespace Vueling.Presentation.WinSite
                     break;
             }
 
-        }
+        } 
+        #endregion
 
-        private void eNToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.eSToolStripMenuItem.Checked = false;
-            this.cATToolStripMenuItem.Checked = false;
-            this.eNToolStripMenuItem.Checked = true;
-            cul = CultureInfo.CreateSpecificCulture("en");
-            confManager.GrabarIdioma(Idioma.EN);
 
-            UpdateLanguage();
-        }
 
 
     }

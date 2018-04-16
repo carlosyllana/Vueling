@@ -12,49 +12,36 @@ namespace Vueling.Common.Logic
     {
 
         private static ListadoAlumnosJson instance = null;
-        private static List<Alumno> alumnoList = null;
+        private static List<Alumno> alumnoList = new List<Alumno>();
+        private static readonly object padlock = new object();
 
         private ListadoAlumnosJson() {
 
-            alumnoList = new List<Alumno>();
             DAOJson<Alumno> daoJson = new DAOJson<Alumno>();
-            AddList(daoJson.GetList());
+            alumnoList = daoJson.GetList();
+        }
+
+        public List<Alumno> GetList()
+        {
+            return alumnoList;
         }
 
         public static ListadoAlumnosJson Instance
         {
             get
             {
-                lock (alumnoList)
+                if (instance == null)
                 {
-                    if (instance == null)
-                        instance = new ListadoAlumnosJson();
-                    return instance;
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                            instance = new ListadoAlumnosJson();
+                        return instance;
+                    }
                 }
+                return instance;
             }
 
-        }
-
-        public void AddAlumno(Alumno alumno)
-        {
-            alumnoList.Add(alumno);
-        }
-        public void AddList(List<Alumno> listAl)
-        {
-            foreach (var item in listAl)
-            {
-                alumnoList.Add(item);
-            }
-        }
-
-        public bool ContainsAlumno(Alumno alumno)
-        {
-            return alumnoList.Contains(alumno);
-        }
-
-        public List<Alumno> GetListValues()
-        {
-            return alumnoList;
         }
 
     }

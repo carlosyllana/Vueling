@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Vueling.Common.Logic.Model
 {
 
-    [Table(Name = "Alumno")]
+    [Table(Name = "Alumnos")]
     public class Alumno : VuelingObject 
     {
         [Column(IsPrimaryKey = true)]
@@ -45,6 +45,7 @@ namespace Vueling.Common.Logic.Model
         public Alumno(string guid, string id, string nombre, string apellidos, string dni, string fechaDeNacimiento, string edad, string fechaDeRegistro)
        // :base(Guid.Parse(guid))
         {
+            Guid = Guid.Parse(guid);
             Id = Convert.ToInt32(id);
             Nombre = nombre;
             Apellido = apellidos;

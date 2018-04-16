@@ -8,53 +8,43 @@ using Vueling.DataAccess.Dao;
 
 namespace Vueling.Common.Logic
 {
-     public sealed class ListadoAlumnosTxt 
+    public sealed class ListadoAlumnosTxt
     {
 
         private static ListadoAlumnosTxt instance = null;
         private static List<Alumno> alumnoList = new List<Alumno>();
+        private static readonly object padlock = new object();
 
-        private ListadoAlumnosTxt() {
+        private ListadoAlumnosTxt()
+        {
 
             DAOTxt<Alumno> daoTxt = new DAOTxt<Alumno>();
-            AddList(daoTxt.GetList());
+            alumnoList = daoTxt.GetList();
         }
 
+        public List<Alumno> GetList()
+        {
+            return alumnoList;
+        }
         public static ListadoAlumnosTxt Instance
         {
             get
             {
-                lock (alumnoList)
+                if (instance == null)
                 {
-                    if (instance == null)
-                        instance = new ListadoAlumnosTxt();
-                    return instance;
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                            instance = new ListadoAlumnosTxt();
+                        return instance;
+                    }
                 }
+                return instance;
             }
 
         }
 
-        public void AddAlumno(Alumno alumno)
-        {
-            alumnoList.Add(alumno);
-        }
-        public void AddList(List<Alumno> listAl)
-        {
-            foreach (var item in listAl)
-            {
-                alumnoList.Add(item);
-            }
-        }
-
-        public bool ContainsAlumno(Alumno alumno)
-        {
-            return alumnoList.Contains(alumno);
-        }
-
-        public List<Alumno> GetListValues()
-        {
-            return alumnoList;
-        }
-
+        public static List<Alumno> AlumnoList { get => alumnoList; set => alumnoList = value; }
     }
+
 }

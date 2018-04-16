@@ -56,9 +56,7 @@ namespace Vueling.DataAccess.Dao.DAO
 
             IQueryable<T> list = _db.GetTable<T>();
             var query = from item in list
-                        where true == true
-                        select item;
-            var a = query.ToList();
+                              select item;
             return query.ToList();
         }
 

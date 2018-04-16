@@ -21,13 +21,16 @@ namespace Vueling.Business.Logic
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
         private ConfigManager confManager = null;
 
+        public AlumnoBl() {
+            confManager = new ConfigManager();
+        }
+
         public Alumno Add(Alumno alumno)
         {
             try
             {
                 _log.Fatal("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name+ " -> " + alumno.ToString());
                 //Calcular Campos
-                confManager = new ConfigManager();
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
                 IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
@@ -121,12 +124,20 @@ namespace Vueling.Business.Logic
 
             try
             {
-                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-                IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-                //Añadir.
-                var a = doc.GetList();
-                return a;
+                switch (confManager.GetActualFormat())
+                {
+                    case TipoFichero.TXT:
+                        return ListadoAlumnosTxt.Instance.GetList();
+                    case TipoFichero.JSON:
+                        return ListadoAlumnosJson.Instance.GetList();
+                    case TipoFichero.XML:
+                        return ListadoAlumnosXml.Instance.GetList();
+                    case TipoFichero.SQL:
+                        IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
+                        return doc.GetList();
+                    default:
+                        return null;
+                }
 
 
 

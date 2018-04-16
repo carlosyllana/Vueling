@@ -73,10 +73,6 @@
     <Compile Include="Log\AdpSerilog.cs" />
     <Compile Include="Log\IVuelingLogger.cs" />
     <Compile Include="Model\Idioma.cs" />
-    <Compile Include="Model\VuelingObjectTypes.cs" />
-    <Compile Include="Singletons\ListadoAlumnosXml.cs" />
-    <Compile Include="Singletons\ListadoAlumnosJson.cs" />
-    <Compile Include="Singletons\ListadoAlumnosTxt.cs" />
     <Compile Include="Utils\DocumentsManager.cs" />
     <Compile Include="Model\TipoFichero.cs" />
     <Compile Include="Model\Alumno.cs" />

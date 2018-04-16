@@ -21,25 +21,26 @@ namespace Vueling.Presentation.WinSite
     {
 
         private ICrudBl<Alumno> _alumnoBl;
-        TipoFichero tipoFichero;
         ResourceManager res_man;
         CultureInfo cul;
         ConfigManager confManager = null;
         public AlumnosShowForm()
         {
             InitializeComponent();
+            this.dataGridAlumnos.ReadOnly = true;
             cul = Thread.CurrentThread.CurrentCulture;
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
+            //Iniciamos utilidades y componentes
             confManager = new ConfigManager();
-            UpdateLanguage();
             _alumnoBl = new AlumnoBl();
-            tipoFichero = confManager.GetActualFormat();
-            CheckFormatMenu();
-            this.dataGridAlumnos.ReadOnly = true;
-            ViewData(tipoFichero);
-            LoadCbCampo();
+            //Cargamos el menú
+            LoadFormatItem();
             LoadLenguageItem();
-
+            //Actualizamos Componentes por idoma
+            UpdateLanguage();
+            //Mostramos La pantalla.
+            ViewData();
+            LoadCbCampo();
 
         }
 
@@ -51,30 +52,7 @@ namespace Vueling.Presentation.WinSite
             }
         }
 
-        private void ViewData(TipoFichero tipo)
-        {
-            switch (tipo)
-            {
-                case TipoFichero.TXT:
-                    dataGridAlumnos.DataSource = ListadoAlumnosTxt.Instance.GetListValues();
-                    dataGridAlumnos.Update();
-                    break;
-                case TipoFichero.JSON:
-                    dataGridAlumnos.DataSource = ListadoAlumnosJson.Instance.GetListValues();
-                    dataGridAlumnos.Update();
-                    break;
 
-                case TipoFichero.XML:
-                    dataGridAlumnos.DataSource = ListadoAlumnosXml.Instance.GetListValues();
-                    dataGridAlumnos.Update();
-                    break;
-                case TipoFichero.SQL:
-                    dataGridAlumnos.DataSource = _alumnoBl.getList();
-                    dataGridAlumnos.Update();
-                    break;
-
-            }
-        }
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
@@ -99,56 +77,6 @@ namespace Vueling.Presentation.WinSite
 
         }
 
-        private void GetLinqData(String column, String value)
-        {
-            if (!String.IsNullOrEmpty(value) && !String.IsNullOrEmpty(column))
-            {
-
-                switch (tipoFichero)
-                {
-                    case TipoFichero.TXT:
-                        var queryTxt =
-                            from Alumno item in ListadoAlumnosTxt.Instance.GetListValues()
-                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
-                            select item;
-                        dataGridAlumnos.DataSource = queryTxt.ToList(); dataGridAlumnos.Update();
-                        break;
-                    case TipoFichero.JSON:
-                        var queryJson =
-                            from Alumno item in ListadoAlumnosJson.Instance.GetListValues()
-                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
-                            select item;
-
-                        dataGridAlumnos.DataSource = queryJson.ToList();
-                        dataGridAlumnos.Update();
-                        break;
-
-                    case TipoFichero.XML:
-                        var queryXml =
-                            from Alumno item in ListadoAlumnosXml.Instance.GetListValues()
-                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
-                            select item;
-                        dataGridAlumnos.DataSource = queryXml.ToList();
-                        dataGridAlumnos.Update();
-                        break;
-                    case TipoFichero.SQL:
-                        var querySQL =
-                                        from Alumno item in _alumnoBl.getList()
-                                        where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
-                                        select item;
-                        dataGridAlumnos.DataSource = querySQL.ToList();
-                        dataGridAlumnos.Update();
-                        break;
-
-                }
-            }
-            else
-            {
-                ViewData(tipoFichero);
-            }
-
-        }
-
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             String column = cbCampo.Text;
@@ -156,12 +84,33 @@ namespace Vueling.Presentation.WinSite
             GetLinqData(column, value);
         }
 
-
-      
-        private void CheckFormatMenu()
+        private void GetLinqData(String column, String value)
         {
+            if (!String.IsNullOrEmpty(value) && !String.IsNullOrEmpty(column))
+            {
+                var query =
+                         from Alumno item in _alumnoBl.getList()
+                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
+                            select item;
+                        dataGridAlumnos.DataSource = query.ToList(); dataGridAlumnos.Update();
+            }
+            else
+            {
+                ViewData();
+            }
+
+        }
+
+        private void ViewData()
+        {
+            dataGridAlumnos.DataSource = _alumnoBl.getList();
+        }
 
 
+
+
+        private void LoadFormatItem()
+        {
             switch (confManager.GetActualFormat())
             {
                 case TipoFichero.TXT:
@@ -177,9 +126,7 @@ namespace Vueling.Presentation.WinSite
                 case TipoFichero.SQL:
                     this.sQLToolStripMenuItem.Checked = true;
                     break;
-
             }
-
         }
         private void UpdateLanguage()
         {
@@ -191,15 +138,17 @@ namespace Vueling.Presentation.WinSite
             this.format_AlumnoShowForm.Text = res_man.GetString("menuFormat", cul);
         }
 
-      
+
+        #region Format Button Menu
 
         private void txtFormatAlShowForm_Click(object sender, EventArgs e)
         {
             this.txtFormatAlShowForm.Checked = true;
             this.jsonFormatAlShowForm.Checked = false;
             this.xmlFormatAlShowForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = false;
             confManager.Formater(TipoFichero.TXT);
-            ViewData(confManager.GetActualFormat());
+            ViewData();
         }
 
         private void jsonFormatAlShowForm_Click(object sender, EventArgs e)
@@ -207,8 +156,10 @@ namespace Vueling.Presentation.WinSite
             this.txtFormatAlShowForm.Checked = false;
             this.jsonFormatAlShowForm.Checked = true;
             this.xmlFormatAlShowForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = false;
+
             confManager.Formater(TipoFichero.JSON);
-            ViewData(confManager.GetActualFormat());
+            ViewData();
         }
 
         private void xmlFormatAlShowForm_Click(object sender, EventArgs e)
@@ -217,10 +168,24 @@ namespace Vueling.Presentation.WinSite
             this.txtFormatAlShowForm.Checked = false;
             this.jsonFormatAlShowForm.Checked = false;
             this.xmlFormatAlShowForm.Checked = true;
+            this.sQLToolStripMenuItem.Checked = false;
+
             confManager.Formater(TipoFichero.XML);
-            ViewData(confManager.GetActualFormat());
+            ViewData();
         }
 
+        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.txtFormatAlShowForm.Checked = false;
+            this.jsonFormatAlShowForm.Checked = false;
+            this.xmlFormatAlShowForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = true;
+            confManager.Formater(TipoFichero.SQL);
+            ViewData();
+        }
+        #endregion
+
+        #region Language Button Menu
         private void esItemAlShowForm_Click(object sender, EventArgs e)
         {
             this.catItemAlShowForm.Checked = false;
@@ -249,7 +214,10 @@ namespace Vueling.Presentation.WinSite
             cul = CultureInfo.CreateSpecificCulture("en");
             confManager.GrabarIdioma(Idioma.EN);
             UpdateLanguage();
-        }
+        } 
+       
+
+
         private void LoadLenguageItem()
         {
             switch (confManager.GetActualLanguage())
@@ -267,16 +235,6 @@ namespace Vueling.Presentation.WinSite
 
             }
         }
-
-        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.txtFormatAlShowForm.Checked = false;
-            this.jsonFormatAlShowForm.Checked = false;
-            this.xmlFormatAlShowForm.Checked = false;
-            this.sQLToolStripMenuItem.Checked = true;
-            confManager.Formater(TipoFichero.SQL);
-        }
-
-        //label1
+        #endregion
     }
 }

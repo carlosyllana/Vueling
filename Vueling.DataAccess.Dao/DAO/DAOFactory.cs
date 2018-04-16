@@ -16,8 +16,6 @@ namespace Vueling.DataAccess.Dao
         {
             var confManager = new ConfigManager();
 
-
-
             switch (confManager.GetActualFormat())
             {
                 case TipoFichero.TXT:

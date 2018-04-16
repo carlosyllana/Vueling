@@ -12,9 +12,5 @@ namespace Vueling.Business.Logic
     {
         T Add(T alumno);
         List<T> getList();
-        //void Formater(TipoFichero tipoFichero);
-        //TipoFichero GetActualFormat();
-        //void GrabarIdioma(Idioma idioma);
-        //Idioma GetActualLanguage();
     }
 }
