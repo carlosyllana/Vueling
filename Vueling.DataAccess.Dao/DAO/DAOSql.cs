@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Linq;
-using System.Data.SqlClient;
+
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
@@ -17,55 +14,81 @@ namespace Vueling.DataAccess.Dao.DAO
     public class DAOSql<T> : IDAO<T> where T : VuelingObject
     {
         private readonly IVuelingLogger _log = null;
-        private DataContext _db;
-        private ConfigManager configManager = null;
+        private  DataContext _db;
+        private readonly ConfigManager configManager = null;
 
         public DAOSql()
         {
             configManager = new ConfigManager();
-            _db = new DataContext(configManager.GetStringConnexion());
-            //_db = new DataContext("‪C:\\CursoSqlServer2017\\Data\\VuelingDB.mdf");
-            _db.DeferredLoadingEnabled = false;
         }
 
         public virtual ITable GetTable()
         {
+            _db = new DataContext(configManager.GetStringConnexion());
             return _db.GetTable<T>();
+        }
+
+        public virtual IQueryable<T> GetAll()
+        {
+            _db = new DataContext(configManager.GetStringConnexion());
+            return GetTable().AsQueryable().OfType<T>();
         }
 
         public T Add(T entity)
         {
-            GetTable().InsertOnSubmit(entity);
-            _db.SubmitChanges(); 
-            return Select(entity.Guid); ;
-
+            try
+            {
+                GetTable().InsertOnSubmit(entity);
+                _db.SubmitChanges();
+                return Select(entity.Guid);
+            }finally
+            {
+                _db.Dispose();
+            }
         }
 
         public T Select(Guid guid)
         {
-            IQueryable<T> list = _db.GetTable<Alumno>().OfType<T>();
-            var query = from item in list
-                        where item.Guid == guid
-                        select item;
-            return query.Single();
+            try
+            {
+                var query = from item in GetAll()
+                            where item.Guid == guid
+                            select item;
+                return query.Single();
+            }
+            finally
+            {
+                _db.Dispose();
+            }
+
         }
 
 
         public List<T> GetList()
         {
+            try { 
+                var query = from item in GetAll()
+                            select item;
+                return query.ToList();
 
-            IQueryable<T> list = _db.GetTable<T>();
-            var query = from item in list
-                              select item;
-            return query.ToList();
-        }
+            }
+            finally
+            {
+                _db.Dispose();
+            }
+}
 
-        public virtual IQueryable<T> GetAll()
+        public void Delete (T entity)
         {
-            return _db.GetTable<T>();
-        }
-        
-
+            try { 
+                GetTable().DeleteOnSubmit(entity);
+                _db.SubmitChanges();
+             }
+            finally
+            {
+                _db.Dispose();
+            }
+}
        
     }
 }
