@@ -16,7 +16,7 @@ namespace Vueling.Common.Logic
     public class DocumentsManager
     {
         public static String PATH;
-        private TipoFichero tipo;
+        public TipoFichero tipo { get; set; }
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
         private SendMail mailer;
 

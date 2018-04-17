@@ -11,11 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.Dao", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Common.Logic", "Vueling.Common.Logic\Vueling.Common.Logic.csproj", "{07CAF8A0-68AC-48D0-894F-656930FDF070}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vueling.DataAcces.Dao.Test", "Vueling.DataAcces.Dao.Test\Vueling.DataAcces.Dao.Test.csproj", "{A7CBE72E-9211-4F06-8961-689AD9866EE8}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vueling.Data.SQLScripts", "Vueling.Data.SQLScripts\Vueling.Data.SQLScripts.sqlproj", "{BF1ECA71-BD3A-4542-AD2E-589910FF9195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoTests", "Vueling.DataAccess.DaoTests\Vueling.DataAccess.DaoTests.csproj", "{EC164FFF-F803-4E79-8F99-2F41E568C52F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoTests", "Vueling.DataAccess.DaoTests1\Vueling.DataAccess.DaoTests.csproj", "{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Business.LogicTests", "Vueling.Business.LogicTests\Vueling.Business.LogicTests.csproj", "{F3F78495-4D0B-4DAF-81CD-4EDD991E1B35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,20 +39,20 @@ Global
 		{07CAF8A0-68AC-48D0-894F-656930FDF070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07CAF8A0-68AC-48D0-894F-656930FDF070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07CAF8A0-68AC-48D0-894F-656930FDF070}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7CBE72E-9211-4F06-8961-689AD9866EE8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F78495-4D0B-4DAF-81CD-4EDD991E1B35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F78495-4D0B-4DAF-81CD-4EDD991E1B35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F78495-4D0B-4DAF-81CD-4EDD991E1B35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F78495-4D0B-4DAF-81CD-4EDD991E1B35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

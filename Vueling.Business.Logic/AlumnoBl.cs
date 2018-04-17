@@ -95,12 +95,8 @@ namespace Vueling.Business.Logic
             {
                 _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 DateTime now = DateTime.Today.Date;
-                int age = now.Year - fechaNacimiento.Year;
-                if (now <= fechaNacimiento.AddYears(age))
-                {
-                    --age;
-                }
-                return age;
+                return Convert.ToInt32((now - fechaNacimiento).TotalDays / 365);
+
             }
             catch (IOException ex)
             {
