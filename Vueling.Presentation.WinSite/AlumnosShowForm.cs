@@ -90,7 +90,7 @@ namespace Vueling.Presentation.WinSite
             {
                 var query =
                          from Alumno item in _alumnoBl.getList()
-                            where (item[column]).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
+                            where (item.GetType().GetProperty(column).PropertyType).Equals(Convert.ChangeType(value, item.GetPropertyTypeByName(column)))
                             select item;
                         dataGridAlumnos.DataSource = query.ToList(); dataGridAlumnos.Update();
             }

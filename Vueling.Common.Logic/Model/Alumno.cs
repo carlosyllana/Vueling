@@ -11,6 +11,7 @@ namespace Vueling.Common.Logic.Model
     [Table(Name = "Alumnos")]
     public class Alumno : VuelingObject 
     {
+
         [Column(IsPrimaryKey = true)]
         public override Guid Guid { get ; set; }
 
@@ -121,18 +122,20 @@ namespace Vueling.Common.Logic.Model
             return hashCode;
         }
 
-        public object this[string propertyName]
+        /*public object this[string propertyName]
         {
             get { return this.GetType().GetProperty(propertyName).GetValue(this, null); }
             set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
-        }
+        }*/
 
         public Type GetPropertyTypeByName(string propertyName)
         {
             return (Type)(this.GetType().GetProperty(propertyName).PropertyType);
+
+            
         }
 
-    
+ 
 
 
     }

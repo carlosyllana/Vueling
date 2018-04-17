@@ -9,6 +9,6 @@ namespace Vueling.DataAccess.Dao
     {
         T Add(T entity);
         T Select(Guid guid);
-        List<T> GetList();
+        List<T> GetList();    
     }
 }

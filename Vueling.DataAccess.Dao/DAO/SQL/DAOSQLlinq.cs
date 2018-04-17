@@ -7,28 +7,28 @@ using System.Linq;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
-using Vueling.DataAccess.Dao.DAO.SQL;
 
 namespace Vueling.DataAccess.Dao.DAO
 {
-    public class DAOSql<T> : IDAO<T> where T : VuelingObject
+    public class DAOSQLlinq<T> : IDAO<T> where T : VuelingObject
     {
         private readonly IVuelingLogger _log = null;
         private  DataContext _db;
         private readonly ConfigManager configManager = null;
 
-        public DAOSql()
+        public DAOSQLlinq()
         {
+            
             configManager = new ConfigManager();
         }
 
-        public virtual ITable GetTable()
+        protected virtual ITable GetTable()
         {
             _db = new DataContext(configManager.GetStringConnexion());
             return _db.GetTable<T>();
         }
 
-        public virtual IQueryable<T> GetAll()
+        protected virtual IQueryable<T> GetAll()
         {
             _db = new DataContext(configManager.GetStringConnexion());
             return GetTable().AsQueryable().OfType<T>();

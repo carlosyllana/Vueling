@@ -96,57 +96,15 @@ namespace Vueling.Presentation.WinSite
             this.Owner.Show();
             this.Close();
         }
-
-        private void cATToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.eSToolStripMenuItem.Checked = false;
-            this.cATToolStripMenuItem.Checked = true;
-            cul = CultureInfo.CreateSpecificCulture("ca");
-            confManager.GrabarIdioma(Idioma.CAT);
-            UpdateLanguage();
-        }
-
-        private void eSToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.eSToolStripMenuItem.Checked = true;
-            this.cATToolStripMenuItem.Checked = false;
-            cul = CultureInfo.CreateSpecificCulture("es");
-            confManager.GrabarIdioma(Idioma.ES);
-
-            UpdateLanguage();
-
-        }
-
-        private void tXTToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.tXTToolStripMenuItem1.Checked = true;
-            this.jSONToolStripMenuItem1.Checked = false;
-            this.xMLToolStripMenuItem1.Checked = false;
-            confManager.Formater(TipoFichero.TXT);
-        }
-
-        private void jSONToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.tXTToolStripMenuItem1.Checked = false;
-            this.jSONToolStripMenuItem1.Checked = true;
-            this.xMLToolStripMenuItem1.Checked = false;
-            confManager.Formater(TipoFichero.JSON);
-        }
-        private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.tXTToolStripMenuItem1.Checked = false;
-            this.jSONToolStripMenuItem1.Checked = false;
-            this.xMLToolStripMenuItem1.Checked = true;
-            confManager.Formater(TipoFichero.XML);
-        }
-
-       
+      
 
         private void xmlAlumnoForm_Click(object sender, EventArgs e)
         {
             this.txtAlumnoForm.Checked = false;
             this.jsonAlumnoForm.Checked = false;
             this.xmlAlumnoForm.Checked = true;
+            this.sQLToolStripMenuItem.Checked = false;
+            this.upId.Visible = true;
             confManager.Formater(TipoFichero.XML);
         }
 
@@ -155,6 +113,8 @@ namespace Vueling.Presentation.WinSite
             this.txtAlumnoForm.Checked = false;
             this.jsonAlumnoForm.Checked = true;
             this.xmlAlumnoForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = false;
+            this.upId.Visible = true;
             confManager.Formater(TipoFichero.JSON);
         }
 
@@ -163,7 +123,21 @@ namespace Vueling.Presentation.WinSite
             this.txtAlumnoForm.Checked = true;
             this.jsonAlumnoForm.Checked = false;
             this.xmlAlumnoForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = false;
+            this.upId.Visible = true;
+
             confManager.Formater(TipoFichero.TXT);
+        }
+
+        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.txtAlumnoForm.Checked = false;
+            this.jsonAlumnoForm.Checked = false;
+            this.xmlAlumnoForm.Checked = false;
+            this.sQLToolStripMenuItem.Checked = true;
+            confManager.Formater(TipoFichero.SQL);
+            this.upId.Visible = false;
+
         }
         private void CheckFormatMenu()
         {
@@ -180,6 +154,9 @@ namespace Vueling.Presentation.WinSite
 
                 case TipoFichero.XML:
                     this.xmlAlumnoForm.Checked = true;
+                    break;
+                case TipoFichero.SQL:
+                    this.sQLToolStripMenuItem.Checked = true;
                     break;
 
             }
@@ -232,5 +209,7 @@ namespace Vueling.Presentation.WinSite
 
             }
         }
+
+
     }
 }

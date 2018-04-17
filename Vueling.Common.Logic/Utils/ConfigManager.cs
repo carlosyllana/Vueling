@@ -158,5 +158,59 @@ namespace Vueling.Business.Logic
             }
         }
 
+        public TipoSQL GetActualSQLFormat()
+        {
+            try
+            {
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                //Obtener Formato.
+                ConfigurationManager.RefreshSection("appSettings");
+                var tipo = Int32.Parse(ConfigurationManager.AppSettings["tipoSQL"]);
+                return (TipoSQL)tipo;
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
+                throw;
+
+            }
+            catch (Exception ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al leer  en AppSettings--> " + ex.Message);
+                throw;
+            }
+            finally
+            {
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+        }
+
+        public void SetActualSQLFormat(TipoSQL sqlFormat)
+        {
+            try
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+                _log.Info("Inicio AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                var value = (int)sqlFormat;
+                config.AppSettings.Settings["tipoSQL"].Value = value.ToString();
+                config.Save(ConfigurationSaveMode.Modified);
+            }
+            catch (ConfigurationErrorsException ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Error al Escribir en  AppSettings--> " + ex.Message);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _log.Fatal("Error en " + System.Reflection.MethodBase.GetCurrentMethod().Name + "--> " + ex.Message);
+                throw;
+
+            }
+            finally
+            {
+                _log.Info("Fin de AlumnoBl " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+        }
     }
 }

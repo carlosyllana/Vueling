@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vueling.DataAcces.Dao.Test"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vueling.Data.SQLScripts", "Vueling.Data.SQLScripts\Vueling.Data.SQLScripts.sqlproj", "{BF1ECA71-BD3A-4542-AD2E-589910FF9195}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoTests", "Vueling.DataAccess.DaoTests\Vueling.DataAccess.DaoTests.csproj", "{EC164FFF-F803-4E79-8F99-2F41E568C52F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF1ECA71-BD3A-4542-AD2E-589910FF9195}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC164FFF-F803-4E79-8F99-2F41E568C52F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

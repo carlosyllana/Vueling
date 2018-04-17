@@ -7,6 +7,7 @@ using Vueling.Business.Logic;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.Dao.DAO;
+using Vueling.DataAccess.Dao.DAO.SQL;
 
 namespace Vueling.DataAccess.Dao
 {
@@ -25,7 +26,7 @@ namespace Vueling.DataAccess.Dao
                 case TipoFichero.XML:
                     return new DAOXml<T>();
                 case TipoFichero.SQL:
-                    return new DAOSql<T>();
+                    return SQLFactory<T>.getFormat();
                 default:
                     return null;
             }
