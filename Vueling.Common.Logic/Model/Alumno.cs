@@ -15,7 +15,7 @@ namespace Vueling.Common.Logic.Model
         [Column(IsPrimaryKey = true)]
         public override Guid Guid { get ; set; }
 
-        [Column]
+
         public int Id { get; set; }
         [Column]
         public String Nombre { get; set; }

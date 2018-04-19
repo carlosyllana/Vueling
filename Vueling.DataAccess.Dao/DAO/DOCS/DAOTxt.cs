@@ -20,23 +20,21 @@ namespace Vueling.DataAccess.Dao
     public class DAOTxt<T> : IDAO<T> where T: VuelingObject
     {
         private readonly IVuelingLogger _log= null;
-        private String PATH;
         public DAOTxt()
         {
            
-            DocumentsManager docManager = new DocumentsManager(TipoFichero.TXT);
+            DocumentsManager docManager = new DocumentsManager();
             docManager.LoadDocument();
-            this.PATH = DocumentsManager.PATH;
             _log = new AdpSerilog();
         }
 
-        public T Add(T entity)
+        public T Insert(T entity)
         {
             try
             {
 
                 _log.Info("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                using (var tw = new StreamWriter(@PATH, true))
+                using (var tw = new StreamWriter(DocumentsManager.PATH, true))
                 {
                     tw.WriteLine(entity.ToString());
                 }
@@ -89,7 +87,7 @@ namespace Vueling.DataAccess.Dao
             }
         }
 
-        public List<T> GetList()
+        public List<T> SelectAll()
         {
             try
             {
@@ -97,7 +95,7 @@ namespace Vueling.DataAccess.Dao
                 _log.Info("Inicio TXT " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 string line;
                 List<T> entityList = new List<T>();
-                using (StreamReader file = new StreamReader(@PATH))
+                using (StreamReader file = new StreamReader(DocumentsManager.PATH))
                 {
                 while ((line = file.ReadLine()) != null)
                  {
@@ -171,7 +169,7 @@ namespace Vueling.DataAccess.Dao
                 var entityString = new String[] { };
                 var entityFound = String.Empty;
                 var encontrado = false;
-                using (StreamReader file = new StreamReader(@PATH))
+                using (StreamReader file = new StreamReader(DocumentsManager.PATH))
                 {
                     while (!encontrado && ((line = file.ReadLine()) != null))
                     {

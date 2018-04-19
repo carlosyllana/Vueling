@@ -34,7 +34,7 @@ namespace Vueling.Business.Logic
                 alumno.Edad = CalcularEdad(alumno.FechaNacimiento);
                 alumno.FechaRegistro = CalcularFechaRegistro();
                 IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-                return doc.Add(alumno);
+                return doc.Insert(alumno);
 
 
             }
@@ -130,9 +130,9 @@ namespace Vueling.Business.Logic
                         return ListadoAlumnosXml.Instance.GetList();
                     case TipoFichero.SQL:
                         IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-                        return doc.GetList();
+                        return doc.SelectAll();
                     default:
-                        return null;
+                        return new List<Alumno>();
                 }
 
 

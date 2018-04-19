@@ -156,6 +156,7 @@ namespace Vueling.Presentation.WinSite
                     this.xmlAlumnoForm.Checked = true;
                     break;
                 case TipoFichero.SQL:
+                    this.upId.Visible = false;
                     this.sQLToolStripMenuItem.Checked = true;
                     break;
 

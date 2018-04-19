@@ -4,17 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Vueling.Business.Logic;
 using Vueling.Common.Logic;
 using Vueling.Common.Logic.Model;
-using System.Threading;
-using System.Resources;
-using Vueling.Presentation.WinSite.Properties;
 using System.Reflection;
 
 namespace Vueling.Presentation.WinSite

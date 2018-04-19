@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Common.Logic", "Vue
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Vueling.Data.SQLScripts", "Vueling.Data.SQLScripts\Vueling.Data.SQLScripts.sqlproj", "{BF1ECA71-BD3A-4542-AD2E-589910FF9195}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoTests", "Vueling.DataAccess.DaoTests1\Vueling.DataAccess.DaoTests.csproj", "{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.DataAccess.DaoIntegrationTests", "Vueling.DataAccess.DaoTests1\Vueling.DataAccess.DaoIntegrationTests.csproj", "{81E4B6D1-6AB8-4D89-99DC-426EB66970E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vueling.Business.LogicTests", "Vueling.Business.LogicTests\Vueling.Business.LogicTests.csproj", "{F3F78495-4D0B-4DAF-81CD-4EDD991E1B35}"
 EndProject

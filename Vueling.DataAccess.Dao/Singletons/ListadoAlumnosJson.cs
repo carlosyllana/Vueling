@@ -18,7 +18,7 @@ namespace Vueling.Common.Logic
         private ListadoAlumnosJson() {
 
             DAOJson<Alumno> daoJson = new DAOJson<Alumno>();
-            alumnoList = daoJson.GetList();
+            alumnoList = daoJson.SelectAll();
         }
 
         public List<Alumno> GetList()

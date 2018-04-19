@@ -16,10 +16,7 @@ namespace Vueling.DataAccess.Dao.Tests
     public class DAOIntegrationSQLTests
     {
 
-        public void InitTest()
-        {
 
-        }
 
 
         public static IEnumerable<object[]> DatosAlumno()
@@ -37,7 +34,7 @@ namespace Vueling.DataAccess.Dao.Tests
             configManager.Formater(TipoFichero.SQL);
             configManager.SetActualSQLFormat(TipoSQL.LINQ);
             IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-            Alumno alObt= doc.Add(alumno);
+            Alumno alObt= doc.Insert(alumno);
             Assert.IsTrue(alumno.Equals(alObt));
         }
 
@@ -49,7 +46,7 @@ namespace Vueling.DataAccess.Dao.Tests
             configManager.Formater(TipoFichero.SQL);
             configManager.SetActualSQLFormat(TipoSQL.SQL);
             IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-            Alumno alObt = doc.Add(alumno);
+            Alumno alObt = doc.Insert(alumno);
             Assert.IsTrue(alumno.Equals(alObt));
         }
 
@@ -61,7 +58,7 @@ namespace Vueling.DataAccess.Dao.Tests
             configManager.Formater(TipoFichero.SQL);
             configManager.SetActualSQLFormat(TipoSQL.SP);
             IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-            Alumno alObt = doc.Add(alumno);
+            Alumno alObt = doc.Insert(alumno);
             Assert.IsTrue(alumno.Equals(alObt));
         }
     }

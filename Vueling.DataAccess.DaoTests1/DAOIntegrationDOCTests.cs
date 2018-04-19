@@ -15,27 +15,20 @@ namespace Vueling.DataAccess.Dao.Tests
     [TestClass()]
     public class DAOIntegrationDOCTests
     {
+
+        ConfigManager configManager = null;
+
         [TestInitialize]
         public void InitTest()
         {
-            DocumentsManager docManager = new DocumentsManager(TipoFichero.TXT);
-            if (File.Exists(docManager.GetPath())) File.Delete(docManager.GetPath());
-            docManager.tipo = TipoFichero.JSON;
-            if (File.Exists(docManager.GetPath())) File.Delete(docManager.GetPath());
-            docManager.tipo = TipoFichero.XML;
-            if (File.Exists(docManager.GetPath())) File.Delete(docManager.GetPath());
-
+            configManager = new ConfigManager();
+        
         }
 
         [TestCleanup]
         public void CleanTest()
         {
-            DocumentsManager docManager = new DocumentsManager(TipoFichero.TXT);
-            File.Delete(docManager.GetPath());
-            docManager.tipo = TipoFichero.JSON;
-            File.Delete(docManager.GetPath());
-            docManager.tipo = TipoFichero.XML;
-            File.Delete(docManager.GetPath());
+
         }
 
         public static IEnumerable<object[]> DatosAlumno()
@@ -49,10 +42,9 @@ namespace Vueling.DataAccess.Dao.Tests
         [DynamicData(nameof(DatosAlumno), DynamicDataSourceType.Method)]
         public void TestDAOTXT(Alumno alumno)
         {
-            ConfigManager configManager = new ConfigManager();
             configManager.Formater(TipoFichero.TXT);
             IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-            Alumno alObt= doc.Add(alumno);
+            Alumno alObt= doc.Insert(alumno);
             Assert.IsTrue(alumno.Equals(alObt));
         }
 
@@ -60,10 +52,10 @@ namespace Vueling.DataAccess.Dao.Tests
         [DynamicData(nameof(DatosAlumno), DynamicDataSourceType.Method)]
         public void TestDAOJSON(Alumno alumno)
         {
-            ConfigManager configManager = new ConfigManager();
-            configManager.Formater(TipoFichero.SQL);
+
+            configManager.Formater(TipoFichero.JSON);
             IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-            Alumno alObt = doc.Add(alumno);
+            Alumno alObt = doc.Insert(alumno);
             Assert.IsTrue(alumno.Equals(alObt));
         }
 
@@ -71,10 +63,9 @@ namespace Vueling.DataAccess.Dao.Tests
         [DynamicData(nameof(DatosAlumno), DynamicDataSourceType.Method)]
         public void TestDAOXML(Alumno alumno)
         {
-            ConfigManager configManager = new ConfigManager();
             configManager.Formater(TipoFichero.XML);
             IDAO<Alumno> doc = DAOFactory<Alumno>.getFormat();
-            Alumno alObt = doc.Add(alumno);
+            Alumno alObt = doc.Insert(alumno);
             Assert.IsTrue(alumno.Equals(alObt));
         }
     }

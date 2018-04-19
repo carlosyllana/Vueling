@@ -12,7 +12,7 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao.DAO
 {
-    public class DAOSP<T> : IDAO<T> where T : VuelingObject
+    public class DAOSP<T> : ICrud<T> where T : VuelingObject
     {
         private readonly IVuelingLogger _log = null;
         private  DataContext _db;
@@ -25,7 +25,7 @@ namespace Vueling.DataAccess.Dao.DAO
         }
 
 
-        public T Add(T entity)
+        public T Insert(T entity)
         {
             try
             {
@@ -33,6 +33,7 @@ namespace Vueling.DataAccess.Dao.DAO
                 {
                     using (SqlCommand command = new SqlCommand())
                     {
+                        var id = String.Empty;
                         command.Connection = connection;
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "insertonAlumnos";
@@ -45,7 +46,7 @@ namespace Vueling.DataAccess.Dao.DAO
                         connection.Open();
                          command.ExecuteNonQuery();
                         
-                        return Select(entity.Guid);
+                        return SelectById((int) entity.GetType().GetProperty("Id").GetValue(entity));
                        
                     }
                 }
@@ -56,7 +57,7 @@ namespace Vueling.DataAccess.Dao.DAO
                 throw;
             }
         }
-        public T Select(Guid guid)
+        public T SelectById(int id)
         {
             try
             {
@@ -71,7 +72,7 @@ namespace Vueling.DataAccess.Dao.DAO
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "selectAlumnosByID";
 
-                         command.Parameters.AddWithValue("@Guid", guid);
+                         command.Parameters.AddWithValue("@Id", id);
 
                         connection.Open();
                         var reader = command.ExecuteReader();
@@ -100,7 +101,7 @@ namespace Vueling.DataAccess.Dao.DAO
         }
 
 
-        public List<T> GetList()
+        public List<T> SelectAll()
         {
             {
                 try
@@ -139,6 +140,22 @@ namespace Vueling.DataAccess.Dao.DAO
                     throw;
                 }
             }
+        }
+
+        public T Update(T entity)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        public T Delete(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IDelete<T>.Delete(T entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

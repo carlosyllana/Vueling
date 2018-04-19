@@ -20,7 +20,7 @@ namespace Vueling.Common.Logic
         private ListadoAlumnosXml(){
 
             DAOXml<Alumno> daoXml = new DAOXml<Alumno>();
-            alumnoList = daoXml.GetList();
+            alumnoList = daoXml.SelectAll();
         }
 
         public List<Alumno> GetList()

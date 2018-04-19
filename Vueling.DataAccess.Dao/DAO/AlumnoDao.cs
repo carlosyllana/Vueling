@@ -15,7 +15,7 @@ namespace Vueling.DataAccess.Dao
 
 
         private readonly IVuelingLogger _log = null;
-        private IDAO<T> iDoc;
+        private  readonly IDAO<T> iDoc;
 
         public AlumnoDao(IDAO<T> doc)
         {
@@ -24,12 +24,12 @@ namespace Vueling.DataAccess.Dao
 
         }
 
-        public T Add(T entity)
+        public T Insert(T entity)
         {
             try
             {
                 _log.Info("Inicio AlumnoDao  " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Alumno ->"+ entity.ToString());
-                return iDoc.Add(entity);
+                return iDoc.Insert(entity);
             }
             catch (ArgumentNullException ex)
             {
@@ -78,13 +78,13 @@ namespace Vueling.DataAccess.Dao
            
         }
 
-        public List<T> GetList()
+        public List<T> SelectAll()
         {
             try
             {
                 _log.Info("Inicio AlumnoDao  " + System.Reflection.MethodBase.GetCurrentMethod().Name );
 
-                return iDoc.GetList();
+                return iDoc.SelectAll();
         }
             catch (ArgumentNullException ex)
             {

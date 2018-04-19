@@ -10,21 +10,21 @@ using Vueling.Common.Logic.Model;
 namespace Vueling.Business.Logic.Tests
 {
     [TestClass()]
-    public class AlumnoBlTests<T> 
+    public class AlumnoBlTests
     {
-        private AlumnoBl _alumnoBl = new AlumnoBl();
+        private readonly AlumnoBl _alumnoBl = new AlumnoBl();
 
         public static IEnumerable<object[]> FechasData()
         {
-            yield return new object[] { new DateTime(1988, 2, 28), 30 };
-            yield return new object[] { new DateTime(1988, 2, 28), 22 };
+            yield return new object[] { new DateTime(1994, 1, 12), 24 };
+            yield return new object[] { new DateTime(1996, 2, 28), 22 };
         }
 
         [DataTestMethod]
         [DynamicData(nameof(FechasData), DynamicDataSourceType.Method)]
-        public void CalcularEdadTest(DateTime registro, DateTime nacimiento, int result)
+        public void CalcularEdadTest(DateTime nacimiento, int result)
         {
-            Assert.IsTrue(_alumnoBl.CalcularEdad( nacimiento) == result);
+            Assert.IsTrue(_alumnoBl.CalcularEdad(nacimiento) == result);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Vueling.Common.Logic
         {
 
             DAOTxt<Alumno> daoTxt = new DAOTxt<Alumno>();
-            alumnoList = daoTxt.GetList();
+            alumnoList = daoTxt.SelectAll();
         }
 
         public List<Alumno> GetList()

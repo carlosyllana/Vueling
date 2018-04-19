@@ -6,7 +6,8 @@ using Vueling.DataAccess.Dao.DAO;
 namespace Vueling.DataAccess.Dao
 
 {
-    public interface IDAO<T>: ICreate<T>, IReadDoc<T> where T : VuelingObject
+    public interface ICrud<T>: ICreate<T>, IReadSQL<T>, IUpdate<T>, IDelete<T> where T : VuelingObject
     {
+
     }
 }

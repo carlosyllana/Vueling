@@ -10,20 +10,19 @@ using System.Reflection;
 using Vueling.Common.Logic.Log;
 using System.Security;
 using Vueling.Common.Logic.Utils;
+using Vueling.Business.Logic;
 
 namespace Vueling.Common.Logic
 {
     public class DocumentsManager
     {
         public static String PATH;
-        public TipoFichero tipo { get; set; }
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
-        private SendMail mailer;
-
-        public DocumentsManager(TipoFichero tipo)
+        private System.Object lockThis = new System.Object();
+        ConfigManager confManager = null;
+        public DocumentsManager()
         {
-            mailer = new SendMail();
-            this.tipo = tipo;
+            confManager = new ConfigManager();
             LoadDocument();
         }
 
@@ -32,11 +31,15 @@ namespace Vueling.Common.Logic
             PATH = GetPath();
             try
             {
-                _log.Info("Inicio DocumentManager " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                if (!File.Exists(PATH))
+                lock (lockThis)
                 {
-                    File.CreateText(PATH);
+                    _log.Info("Inicio DocumentManager " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                    if (!File.Exists(PATH))
+                    {
+                        File.CreateText(PATH);
+                    }
                 }
+
             }
             catch (ArgumentNullException ex)
             {
@@ -90,7 +93,7 @@ namespace Vueling.Common.Logic
             try
             {
                 var fileName = string.Empty;
-                switch (tipo)
+                switch (confManager.GetActualFormat())
                 {
                     case TipoFichero.TXT:
                         fileName = Environment.GetEnvironmentVariable("txtFile", EnvironmentVariableTarget.User);

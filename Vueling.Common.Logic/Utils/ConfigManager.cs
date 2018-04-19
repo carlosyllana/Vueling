@@ -15,7 +15,7 @@ namespace Vueling.Business.Logic
     {
 
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
-
+        private System.Object lockThis = new System.Object();
         public ConfigManager()
         {
         }

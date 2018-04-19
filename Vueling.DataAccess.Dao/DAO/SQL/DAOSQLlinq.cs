@@ -10,15 +10,15 @@ using Vueling.Common.Logic.Model;
 
 namespace Vueling.DataAccess.Dao.DAO
 {
-    public class DAOSQLlinq<T> : IDAO<T> where T : VuelingObject
+    public class DAOSQLlinq<T> : ICrud<T> where T : VuelingObject
     {
         private readonly IVuelingLogger _log = null;
-        private  DataContext _db;
+        private DataContext _db;
         private readonly ConfigManager configManager = null;
 
         public DAOSQLlinq()
         {
-            
+
             configManager = new ConfigManager();
         }
 
@@ -34,25 +34,28 @@ namespace Vueling.DataAccess.Dao.DAO
             return GetTable().AsQueryable().OfType<T>();
         }
 
-        public T Add(T entity)
+        public T Insert(T entity)
         {
             try
             {
                 GetTable().InsertOnSubmit(entity);
                 _db.SubmitChanges();
-                return Select(entity.Guid);
-            }finally
+                return SelectById(Convert.ToInt32(entity.GetType().GetProperty("id").GetValue(entity, null)));
+            }
+            finally
             {
                 _db.Dispose();
             }
         }
 
-        public T Select(Guid guid)
+        public T SelectById(int id)
         {
             try
             {
+              // GetTable().OfType<T>().Single(c => (int)c.GetType().GetProperty("Id").GetValue(c) == id);
+
                 var query = from item in GetAll()
-                            where item.Guid == guid
+                            where Convert.ToInt32(item.GetType().GetProperty("id").GetValue(item, null)) == id
                             select item;
                 return query.Single();
             }
@@ -64,9 +67,10 @@ namespace Vueling.DataAccess.Dao.DAO
         }
 
 
-        public List<T> GetList()
+        public List<T> SelectAll()
         {
-            try { 
+            try
+            {
                 var query = from item in GetAll()
                             select item;
                 return query.ToList();
@@ -76,19 +80,40 @@ namespace Vueling.DataAccess.Dao.DAO
             {
                 _db.Dispose();
             }
-}
+        }
 
-        public void Delete (T entity)
+        int IDelete<T>.Delete(T entity)
         {
-            try { 
+            try
+            {
+                var inicio = GetAll().Count();
                 GetTable().DeleteOnSubmit(entity);
                 _db.SubmitChanges();
-             }
+                var final = GetAll().Count();
+                return inicio - final;
+
+            }
             finally
             {
                 _db.Dispose();
             }
-}
-       
+        }
+
+        public T Update(T entity)
+        {
+
+            var entityToModify = from item in GetAll()
+                        where item.GetType().GetProperty("Id") == entity.GetType().GetProperty("Id")
+                        select item;
+ 
+
+            
+            foreach (var property in entityToModify.GetType().GetProperties())
+            {
+                property.SetValue(entityToModify, entity.GetType().GetProperty(property.Name).GetValue(entity, null));
+            }
+            _db.SubmitChanges();
+            return SelectById(Convert.ToInt32(entity.GetType().GetProperty("Id")));
+        }
     }
 }

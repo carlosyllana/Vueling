@@ -11,7 +11,7 @@ namespace Vueling.DataAccess.Dao.DAO.SQL
 {
     public static class SQLFactory<T> where T : VuelingObject
     {
-        public static IDAO<T> getFormat()
+        public static ICrud<T> getFormat()
         {
             var confManager = new ConfigManager();
 

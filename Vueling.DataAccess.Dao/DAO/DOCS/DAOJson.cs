@@ -18,28 +18,26 @@ namespace Vueling.DataAccess.Dao
     public class DAOJson<T> : IDAO<T> where T: VuelingObject
     {
 
-        private String PATH;
+        private readonly string PATH;
         private readonly IVuelingLogger _log = null;
-        private SendMail mailer;
 
         public DAOJson()
         {
-            mailer = new SendMail();
-            DocumentsManager docManager = new DocumentsManager(TipoFichero.JSON);
+            DocumentsManager docManager = new DocumentsManager();
             docManager.LoadDocument();
             this.PATH = DocumentsManager.PATH;
             _log = new AdpSerilog();
         }
 
 
-        public T Add(T entity)
+        public T Insert(T entity)
         {
             try
             {
 
                 _log.Info("Inicio JSON " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-                List<T> entityList = GetList();
+                List<T> entityList = SelectAll();
                 if (entityList == null)
                 {
                     entityList = new List<T>();
@@ -105,7 +103,7 @@ namespace Vueling.DataAccess.Dao
 
         }
 
-        public List<T> GetList()
+        public List<T> SelectAll()
         {
 
             try

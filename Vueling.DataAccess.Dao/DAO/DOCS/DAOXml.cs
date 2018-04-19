@@ -19,27 +19,23 @@ namespace Vueling.DataAccess.Dao
     {
 
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
-        public String PATH;
-        private SendMail mailer;
-
+        private DocumentsManager docManager = null;
 
         public DAOXml()
         {
-            mailer = new SendMail();
-            DocumentsManager docManager = new DocumentsManager(TipoFichero.XML);
+            docManager =new DocumentsManager();
             docManager.LoadDocument();
-            this.PATH = DocumentsManager.PATH;
         }
 
         public IVuelingLogger Log => _log;
 
-        public T Add(T entity)
+        public T Insert(T entity)
         {
             try
             {
                 Log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                List<T> entityList = GetList();
+                List<T> entityList = SelectAll();
                 XmlSerializer xSeriz = new XmlSerializer(typeof(List<Alumno>));
 
                 if (entityList == null)
@@ -47,7 +43,7 @@ namespace Vueling.DataAccess.Dao
                     entityList = new List<T>();
                 }
 
-                using (FileStream fs1 = new FileStream(@PATH, FileMode.Create))
+                using (FileStream fs1 = new FileStream(docManager.GetPath(), FileMode.Create))
                 {
                     entityList.Add(entity);
                     xSeriz.Serialize(fs1, entityList);
@@ -103,7 +99,7 @@ namespace Vueling.DataAccess.Dao
 
 
 
-        public List<T> GetList()
+        public List<T> SelectAll()
         {
             try
             {
@@ -111,7 +107,7 @@ namespace Vueling.DataAccess.Dao
                 _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 List<T> entityList =null;
                 XmlSerializer xSeriz = new XmlSerializer(typeof(List<T>));
-                using (StreamReader r = new StreamReader(@PATH))
+                using (StreamReader r = new StreamReader(docManager.GetPath()))
                 {
                     String xml = r.ReadToEnd();
                     if (xml==String.Empty){
@@ -179,7 +175,7 @@ namespace Vueling.DataAccess.Dao
 
                 _log.Info("Inicio XML " + System.Reflection.MethodBase.GetCurrentMethod().Name);
                 T entityFound = null;
-                List<T> entityList = GetList();
+                List<T> entityList = SelectAll();
                  foreach (var item in entityList)
                 {
 

@@ -74,17 +74,20 @@
   <ItemGroup>
     <Compile Include="DAO\AlumnoDao.cs" />
     <Compile Include="DAO\DOCS\DAOJson.cs" />
+    <Compile Include="DAO\Interfaces\IDelete.cs" />
+    <Compile Include="DAO\Interfaces\IGeneric.cs" />
+    <Compile Include="DAO\Interfaces\IReadSQL.cs" />
+    <Compile Include="DAO\Interfaces\IUpdate.cs" />
+    <Compile Include="DAO\Interfaces\IReadDoc.cs" />
+    <Compile Include="DAO\Interfaces\ICreate.cs" />
     <Compile Include="DAO\SQL\DAOSP.cs" />
     <Compile Include="DAO\SQL\DAOSQLlinq.cs" />
     <Compile Include="DAO\SQL\DAOSql.cs" />
     <Compile Include="DAO\DOCS\DAOTxt.cs" />
     <Compile Include="DAO\DOCS\DAOXml.cs" />
     <Compile Include="DAO\DAOFactory.cs" />
-    <Compile Include="DAO\ICRUD.cs" />
+    <Compile Include="DAO\Interfaces\ICrud.cs" />
     <Compile Include="DAO\IDAO.cs" />
-    <Compile Include="DAO\SQL\Conexion.cs" />
-    <Compile Include="DAO\SQL\EntitiesContext.cs" />
-    <Compile Include="DAO\SQL\Crear_SP.cs" />
     <Compile Include="DAO\SQL\SQLFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\ResourceSQL.Designer.cs">
