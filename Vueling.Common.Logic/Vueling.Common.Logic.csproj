@@ -69,9 +69,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Log\AdpLog4Net.cs" />
-    <Compile Include="Log\AdpSerilog.cs" />
-    <Compile Include="Log\IVuelingLogger.cs" />
+    <Compile Include="Logs\AdpLog4Net.cs" />
+    <Compile Include="Logs\AdpSerilog.cs" />
+    <Compile Include="Logs\IVuelingLogger.cs" />
     <Compile Include="Model\Idioma.cs" />
     <Compile Include="Model\TipoSQL.cs" />
     <Compile Include="Utils\DocumentsManager.cs" />
