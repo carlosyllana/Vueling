@@ -28,6 +28,9 @@ namespace Vueling.DataAccess.Dao
         {
             try
             {
+
+                IDAO<T> daof = DAOFactory<T>.getFormat();
+                daof.
                 _log.Info("Inicio AlumnoDao  " + System.Reflection.MethodBase.GetCurrentMethod().Name + " Alumno ->"+ entity.ToString());
                 return iDoc.Insert(entity);
             }

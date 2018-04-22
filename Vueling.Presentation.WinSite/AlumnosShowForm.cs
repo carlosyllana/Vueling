@@ -32,7 +32,7 @@ namespace Vueling.Presentation.WinSite
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
             //Iniciamos utilidades y componentes
             confManager = new ConfigManager();
-            _alumnoBl = new AlumnoBl();
+            _alumnoBl = new GenericBL();
             //Cargamos el menú
             LoadFormatItem();
             LoadLenguageItem();

@@ -59,8 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlumnoBl.cs" />
+    <Compile Include="GenericBL.cs" />
+    <Compile Include="ICrBL.cs" />
     <Compile Include="ICrudBl.cs" />
+    <Compile Include="Interfaces\ICreateBL.cs" />
+    <Compile Include="Interfaces\IDeleteBL.cs" />
+    <Compile Include="Interfaces\IReadDocBL.cs" />
+    <Compile Include="Interfaces\IReadSQLBL.cs" />
+    <Compile Include="Interfaces\IUpdateBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

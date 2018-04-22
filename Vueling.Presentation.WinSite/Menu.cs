@@ -27,7 +27,7 @@ namespace Vueling.Presentation.WinSite
             res_man = new ResourceManager("Vueling.Presentation.WinSite.Properties.Resource", Assembly.GetExecutingAssembly());
 
             InitializeComponent();
-            _alumnoBl = new AlumnoBl();
+            _alumnoBl = new GenericBL();
             confManager = new ConfigManager();
             //Comprobamos el menú
             CheckFormatMenuItem();

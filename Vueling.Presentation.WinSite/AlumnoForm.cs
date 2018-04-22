@@ -33,7 +33,7 @@ namespace Vueling.Presentation.WinSite
 
             UpdateLanguage();
             alumno = new Alumno();
-            _alumnoBl = new AlumnoBl();
+            _alumnoBl = new GenericBL();
             LoadLenguageItem();
             CheckFormatMenu();
 

@@ -12,16 +12,17 @@ using Vueling.Common.Logic;
 using Vueling.Common.Logic.Log;
 using Vueling.Common.Logic.Model;
 using Vueling.DataAccess.Dao;
+using Vueling.DataAccess.Dao.DAO.SQL;
 using static Vueling.Common.Logic.TipoFichero;
 
 namespace Vueling.Business.Logic
 {
-    public class AlumnoBl : ICrudBl<Alumno> 
+    public class GenericBL : ICrBL<Alumno> 
     {
         private readonly IVuelingLogger _log = new AdpLog4Net(MethodBase.GetCurrentMethod().DeclaringType);
         private ConfigManager confManager = null;
 
-        public AlumnoBl() {
+        public GenericBL() {
             confManager = new ConfigManager();
         }
 

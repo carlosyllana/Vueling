@@ -12,7 +12,7 @@ namespace Vueling.Business.Logic.Tests
     [TestClass()]
     public class AlumnoBlTests
     {
-        private readonly AlumnoBl _alumnoBl = new AlumnoBl();
+        private readonly GenericBL _alumnoBl = new GenericBL();
 
         public static IEnumerable<object[]> FechasData()
         {

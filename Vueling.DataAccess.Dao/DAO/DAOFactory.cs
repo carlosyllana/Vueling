@@ -26,7 +26,7 @@ namespace Vueling.DataAccess.Dao
                 case TipoFichero.XML:
                     return new DAOXml<T>();
                 case TipoFichero.SQL:
-                    return SQLFactory<T>.getFormat();
+                    return (IDAO<T>)SQLFactory<T>.getFormat();
                 default:
                     return null;
             }
